@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+</head>
+
+<body>
+    <main id="show">
+
+    </main>
+
+    <script>
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDFxB_nKLuIHeU2rwfHy_w_FcHtRdMUtkg",
+            authDomain: "assignment-project-442a9.firebaseapp.com",
+            projectId: "assignment-project-442a9",
+            storageBucket: "assignment-project-442a9.appspot.com",
+            messagingSenderId: "368296308202",
+            appId: "1:368296308202:web:6036e29f6f107634ca5693"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+
+    <script>
+        function displayAll() {
+            db.collection("tweets").get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    // doc.data() is never undefined for query doc snapshots
+                    console.log(doc.id, " => ", doc.data());
+                    show.innerHTML += `
+                    <h6>${doc.data().author}</h6>
+                    <h4>${doc.data().title}</h4>
+                    <p>${doc.data().content}<hr></p>
+                    `
+                });
+            });
+        }
+        displayAll();
+    </script>
+</body>
+
+</html>

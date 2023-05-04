@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+</head>
+<body>
+    <h1>Welcome to your dashboard, <span id="userName"></span></h1>
+
+    <form class="border w-50 p-4 border-primary rounded">
+        <div class="mb-3">
+            <label for="username" class="form-label">Author</label>
+            <input type="text" class="form-control" id="author" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">title</label>
+            <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Content</label>
+            <textarea name="" id="content" cols="30" rows="10"></textarea>
+            <!-- <input type="password" class="form-control" id="password"> -->
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="postBlog(event)">Post blog</button>
+
+    </form>
+
+    <script>
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDFxB_nKLuIHeU2rwfHy_w_FcHtRdMUtkg",
+          authDomain: "assignment-project-442a9.firebaseapp.com",
+          projectId: "assignment-project-442a9",
+          storageBucket: "assignment-project-442a9.appspot.com",
+          messagingSenderId: "368296308202",
+          appId: "1:368296308202:web:6036e29f6f107634ca5693"
+        };
+      
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+      </script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
