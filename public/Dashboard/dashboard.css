@@ -1,0 +1,20 @@
+*{
+    padding: 0;
+    margin: 0;
+    border:  0;
+}
+
+.fb-logo-link{
+    width: 3%;
+}
+
+main{
+    margin-top: 10vh;
+    height: 90vh;
+}
+
+.left,
+.middle,
+.right{
+    height: 100%;
+}
