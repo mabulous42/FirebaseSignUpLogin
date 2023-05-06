@@ -36,7 +36,7 @@ nav {
     width: 50%;
     height: 100vh;
     background-color: rgb(24, 25, 26);
-    background-color: red;
+    /* background-color: red; */
     padding-bottom: 10vh;
 }
 
@@ -44,7 +44,7 @@ nav {
     height: 100%;
     /* margin-top: 105vh; */
     background-color: rgb(24, 25, 26);
-    background-color: blue;
+    /* background-color: blue; */
 }
 .story-div {
     height: 40vh;
