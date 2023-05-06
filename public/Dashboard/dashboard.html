@@ -63,26 +63,58 @@
         </div>
     </nav>
     <main class="d-flex">
-        <div class="bg-danger w-25 left overflow-auto">A</div>
+        <div class="w-25 left overflow-auto">A</div>
         <div class="w-50 middle d-flex align-items-center justify-content-center overflow-auto">
-            <div class="w-75 inner-middle pt-4">
+            <div class="w-75 inner-middle py-4">
                 <div class="story-div w-100 mb-3 rounded"></div>
                 <div class="post-div w-100 mb-3 rounded">
                     <div class="p-3">
                         <div class="d-flex align-items-center">
                             <div class="me-2 pix-div">
-                                <p class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">A</p>
+                                <p
+                                    class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
+                                    A</p>
                             </div>
-                            <div class="w-100 rounded-pill post-box p-2 ps-3">
+                            <div class="w-100 rounded-pill post-box p-2 ps-3" onclick="openPostModal()">
                                 What's on your mind, <span id="profile-name"></span>
                             </div>
-                            <div class="position-absolute w-100 d-flex align-items-center justify-content-center" id="myPostModal">
+                            <div class="position-absolute w-100 d-flex align-items-center justify-content-center"
+                                id="myPostModal">
                                 <div class="w-50 d-flex align-items-center justify-content-center" id="open-post-modal">
-                                    <div id="write-post-modal" class="w-75 bg-danger">
-                                        <div class="p-3">
+                                    <div id="write-post-modal" class="w-75 shadow rounded">
+                                        <div class="p-3 position-relative">
                                             <h5 class="fw-bold text-center">Create Post</h5>
+                                            <i class="fa-solid fa-xmark position-absolute close-post-modal rounded-circle"
+                                                onclick="closePostModal()"></i>
                                         </div>
                                         <hr class="mb-2 mt-0">
+                                        <div class="d-flex align-items-center py-2 px-3">
+                                            <div class="me-2 pix-div">
+                                                <p
+                                                    class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
+                                                    A</p>
+                                            </div>
+                                            <div>Mustapha Abbas</div>
+                                        </div>
+                                        <div class="w-100 px-3">
+                                            <textarea class="w-100 fs-4 write-content-input" name="" id="" cols="30"
+                                                rows="6" placeholder="What's on your mind, "></textarea>
+                                        </div>
+                                        <div class="px-3">
+                                            <div
+                                                class="d-flex align-items-center justify-content-between border border-white w-100 rounded p-1">
+                                                <div>
+                                                    <button class="add-to-post p-2">Add to your post</button>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <div>B</div>
+                                                    <div>C</div>
+                                                    <div>D</div>
+                                                    <div>E</div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary mt-3 w-100" disabled>Post</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -110,9 +142,48 @@
                         </div>
                     </div>
                 </div>
+                <div class="rounded w-100 mb-3 p-3 my-post-div">
+                    <div class="">
+                        <div class="d-flex align-items-center pix-div">
+                            <h6
+                                class="me-2 text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
+                                A</h6>
+                            <h6 class="">Mustapha Abbas</h6>
+                        </div>
+                        <div class="w-100">
+                            <p>Thank you for being the wonderful person that you are, for bringing so much light and
+                                love into my life, and for being my rock and support through all of life's ups and
+                                downs. I love you more than words can express, and I can't wait to celebrate many more
+                                birthdays with you in the years to come.</p>
+                        </div>
+                        <div class="w-100">
+                            <img src="../images/photo.webp" alt="" class="w-100">
+                        </div>
+                        <hr class="mb-1">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <button class="like rounded w-100 text-center text-center d-flex align-items-center justify-content-center p-2">
+                                <div class="me-2">
+                                    <i class="fa-solid fa-thumbs-up like-icon"></i>
+                                </div>
+                                <div class="like1-text">Like</div>
+                            </button>
+                            <button class="comment rounded w-100 text-center d-flex align-items-center justify-content-center p-2">
+                                <div class="me-2">
+                                    <i class="fa-sharp fa-solid fa-comment comment-icon"></i>
+                                </div>
+                                <div class="comment1-text">Comment</div>
+                            </button>
+                            <button class="share rounded w-100 text-center d-flex align-items-center justify-content-center p-2">
+                                <div class="me-2"><i class="fa-solid fa-share share-icon"></i></div>
+                                <div class="share1-text">Share</div>
+                            </button>
+                        </div>
+                        <hr class="mt-1">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="bg-danger w-25 right overflow-auto">C</div>
+        <div class="w-25 right overflow-auto">C</div>
     </main>
 
     <script>

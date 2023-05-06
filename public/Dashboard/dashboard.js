@@ -1,7 +1,7 @@
 let userName = document.getElementById("userName");
-let author = document.getElementById("author");
-let title = document.getElementById("title");
-let content = document.getElementById("content");
+let postModal = document.getElementById("myPostModal");
+
+postModal.style.visibility = "hidden";
 
 let currentUser = JSON.parse(localStorage.getItem("CU"));
 console.log(currentUser);
@@ -30,4 +30,13 @@ function postBlog(ev) {
         .catch((error) => {
             console.error("Error writing document: ", error);
         });
+}
+
+function openPostModal() {
+    postModal.style.visibility = "visible";    
+}
+
+function closePostModal() {
+    postModal.style.visibility = "hidden";
+
 }

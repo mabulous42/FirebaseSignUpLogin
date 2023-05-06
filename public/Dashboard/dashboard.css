@@ -1,75 +1,78 @@
-*{
+* {
     padding: 0;
     margin: 0;
-    border:  0;
+    border: 0;
     color: white;
 }
 
-button{
+button {
     background-color: inherit;
 }
 
-.fb-logo-link{
+.fb-logo-link {
     width: 3%;
 }
 
-main{
+main {
     margin-top: 10vh;
     height: 90vh;
 }
 
-nav{
-    background-color: rgb(36,37,38);
+nav {
+    background-color: rgb(36, 37, 38);
     color: white;
-    
+
 }
 
 .left,
 .middle,
-.right{
-    height: 100%;
-}
-
-.middle{
-    background-color: rgb(24,25,26);
-}
-
-.inner-middle{
+.right {
     height: 100%;
     background-color: rgb(24,25,26);
 }
 
-.story-div{
+.middle {
+    height: 100%;
+    background-color: rgb(24, 25, 26);
+    background-color: green;
+}
+
+.inner-middle {
+    height: 100%;
+    background-color: rgb(24, 25, 26);
+    background-color: red;
+}
+.story-div {
     height: 40vh;
-    background-color: rgb(36,37,38);
+    background-color: rgb(36, 37, 38);
 }
 
-.post-div{
+.post-div {
     /* height: 20vh; */
-    background-color: rgb(36,37,38);
+    background-color: rgb(36, 37, 38);
     font-size: 18px;
 }
 
-.pix-div{
+.pix-div {
     height: 2.5rem;
 }
 
-.pix{
+.pix {
     width: 2.5rem;
     height: 2.5rem;
 }
 
-.post-box{
+.post-box {
     cursor: pointer;
-    background-color: rgb(58,59,60);
+    background-color: rgb(58, 59, 60);
 }
 
-.grey{
-    color: rgb(176,179,184);
+.grey {
+    color: rgb(176, 179, 184);
     font-weight: 600;
 }
 
-#myPostModal{
+#myPostModal {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.664);
     top: -10vh;
@@ -77,10 +80,51 @@ nav{
     z-index: 50;
 }
 
-#open-post-modal{
+#open-post-modal {
     height: 75%;
 }
 
-#write-post-modal{
+#write-post-modal {
     height: 100%;
+    background-color: rgb(36,37,38);
+}
+
+.close-post-modal {
+    background-color: rgb(58, 59, 60);
+    padding: 0.3rem 0.5rem;
+    font-size: 25px;
+    top: 0.8rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+input {
+    outline: none;
+}
+
+.write-content-input {
+    background-color: inherit;
+    color: black;
+    outline: none;
+    resize: none;
+
+}
+
+.add-to-post{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.my-post-div{
+    background-color: rgb(36,37,38);
+}
+
+.like:hover,
+.comment:hover,
+.share:hover{
+    background-color: rgb(58,59,60);
+}
+
+::-webkit-scrollbar{
+    display: none;
 }
