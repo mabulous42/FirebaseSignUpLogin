@@ -3,6 +3,7 @@ let postModal = document.getElementById("myPostModal");
 let postBtn = document.getElementById("post-btn");
 let content = document.getElementById("content");
 let showPostTag = document.getElementById("show-post");
+let writeAPostTag = document.getElementById("open-post-modal");
 
 postModal.style.visibility = "hidden";
 
@@ -34,6 +35,51 @@ console.log(currentUser.name);
 //             console.error("Error writing document: ", error);
 //         });
 // }
+
+
+function writeSomething() {
+    writeAPostTag.innerHTML = `
+    <div id="write-post-modal" class="w-75 shadow rounded">
+                                <div class="p-3 position-relative">
+                                    <h5 class="fw-bold text-center">Create Post</h5>
+                                    <i class="fa-solid fa-xmark position-absolute close-post-modal rounded-circle"
+                                        onclick="closePostModal()"></i>
+                                </div>
+                                <hr class="mb-2 mt-0">
+                                <div class="d-flex align-items-center py-2 px-3">
+                                    <div class="me-2 pix-div">
+                                        <p
+                                            class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
+                                            A</p>
+                                    </div>
+                                    <div>Mustapha Abbas</div>
+                                </div>
+                                <div class="w-100 px-3">
+                                    <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content"
+                                        cols="30" rows="6" placeholder="What's on your mind, ${currentUser.name}"
+                                        onkeypress="enableButton()"></textarea>
+                                </div>
+                                <div class="px-3">
+                                    <div
+                                        class="d-flex align-items-center justify-content-between border border-white w-100 rounded p-1">
+                                        <div>
+                                            <button class="add-to-post p-2">Add to your post</button>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div>B</div>
+                                            <div>C</div>
+                                            <div>D</div>
+                                            <div>E</div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary mt-3 w-100" id="post-btn" disabled
+                                        onclick="createPost()">Post</button>
+                                </div>
+                            </div>
+    `
+}
+writeSomething();
+
 
 function openPostModal() {
     postModal.style.visibility = "visible";
@@ -72,7 +118,7 @@ function createPost() {
 function displayAllPost() {
     showPostTag.innerHTML = "";
     db.collection("Feeds").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
+        querySnapshot.forEach((doc,index) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
             showPostTag.innerHTML += `
@@ -81,7 +127,7 @@ function displayAllPost() {
                             <h6
                                 class="me-2 text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
                                 A</h6>
-                            <h6 class="">${currentUser.name}</h6>
+                            <h6 class="">${currentUser.name} ${doc.id}</h6>
                         </div>
                         <div class="w-100">
                             <p>${doc.data().content}</p>
@@ -91,7 +137,7 @@ function displayAllPost() {
                         </div>
                         <hr class="mb-1">
                         <div class="d-flex align-items-center justify-content-center">
-                            <button class="like rounded w-100 text-center text-center d-flex align-items-center justify-content-center p-2">
+                            <button class="like rounded w-100 text-center text-center d-flex align-items-center justify-content-center p-2" onclick="isLike(${doc.id})">
                                 <div class="me-2">
                                     <i class="fa-solid fa-thumbs-up like-icon"></i>
                                 </div>
@@ -113,8 +159,11 @@ function displayAllPost() {
                             <div class="pics-div me-2">
                                 <h6 class="pics bg-white text-black rounded-circle d-flex align-items-center justify-content-center">B</h6>
                             </div>
-                            <div class="w-100">
+                            <div class="w-100 position-relative">
                                 <input type="text" name="" id="" placeholder="Write a comment..." class="comment-input p-1 ps-3 rounded-pill w-100">
+                                <button class="position-absolute comment-btn d-flex align-items-center justify-content-center rounded-circle">
+                                <i class="fa-solid fa-square-arrow-up-right send-comment"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -123,3 +172,14 @@ function displayAllPost() {
     });
 }
 displayAllPost();
+
+function isLike(id) {
+    // db.collection("Feeds").get().then((querySnapshot) => {
+    //     querySnapshot.forEach((doc,index) => {
+    //         // doc.data() is never undefined for query doc snapshots
+    //         console.log(doc.id, " => ", doc.data());
+    //     })
+    // })
+    // let liked = 
+    console.log(id);
+}
