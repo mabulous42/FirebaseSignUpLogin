@@ -14,7 +14,7 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 
-<body class="position-relative">
+<body class="">
     <nav class="navbar fixed-top navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <a class="navbar-brand fb-logo-link" href="#">
@@ -62,9 +62,9 @@
             </div>
         </div>
     </nav>
-    <main class="d-flex">
-        <div class="w-25 left overflow-auto">A</div>
-        <div class="w-50 middle d-flex align-items-center justify-content-center overflow-auto">
+    <main class="d-flex position-relative">
+        <div class="left   ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, eaque!</div>
+        <div class="middle d-flex align-items-center justify-content-center overflow-auto">
             <div class="w-75 inner-middle py-4">
                 <div class="story-div w-100 mb-3 rounded"></div>
                 <div class="post-div w-100 mb-3 rounded">
@@ -97,8 +97,8 @@
                                             <div>Mustapha Abbas</div>
                                         </div>
                                         <div class="w-100 px-3">
-                                            <textarea class="w-100 fs-4 write-content-input" name="" id="" cols="30"
-                                                rows="6" placeholder="What's on your mind, "></textarea>
+                                            <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content" cols="30"
+                                                rows="6" placeholder="What's on your mind, " onkeypress="enableButton()"></textarea>
                                         </div>
                                         <div class="px-3">
                                             <div
@@ -113,7 +113,7 @@
                                                     <div>E</div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary mt-3 w-100" disabled>Post</button>
+                                            <button class="btn btn-primary mt-3 w-100" id="post-btn" disabled onclick="createPost()">Post</button>
                                         </div>
                                     </div>
                                 </div>
@@ -142,48 +142,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="rounded w-100 mb-3 p-3 my-post-div">
-                    <div class="">
-                        <div class="d-flex align-items-center pix-div">
-                            <h6
-                                class="me-2 text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
-                                A</h6>
-                            <h6 class="">Mustapha Abbas</h6>
-                        </div>
-                        <div class="w-100">
-                            <p>Thank you for being the wonderful person that you are, for bringing so much light and
-                                love into my life, and for being my rock and support through all of life's ups and
-                                downs. I love you more than words can express, and I can't wait to celebrate many more
-                                birthdays with you in the years to come.</p>
-                        </div>
-                        <div class="w-100">
-                            <img src="../images/photo.webp" alt="" class="w-100">
-                        </div>
-                        <hr class="mb-1">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <button class="like rounded w-100 text-center text-center d-flex align-items-center justify-content-center p-2">
-                                <div class="me-2">
-                                    <i class="fa-solid fa-thumbs-up like-icon"></i>
-                                </div>
-                                <div class="like1-text">Like</div>
-                            </button>
-                            <button class="comment rounded w-100 text-center d-flex align-items-center justify-content-center p-2">
-                                <div class="me-2">
-                                    <i class="fa-sharp fa-solid fa-comment comment-icon"></i>
-                                </div>
-                                <div class="comment1-text">Comment</div>
-                            </button>
-                            <button class="share rounded w-100 text-center d-flex align-items-center justify-content-center p-2">
-                                <div class="me-2"><i class="fa-solid fa-share share-icon"></i></div>
-                                <div class="share1-text">Share</div>
-                            </button>
-                        </div>
-                        <hr class="mt-1">
-                    </div>
+                <div class="" id="show-post">
+                    
                 </div>
             </div>
         </div>
-        <div class="w-25 right overflow-auto">C</div>
+        <div class="right overflow-auto">C</div>
     </main>
 
     <script>

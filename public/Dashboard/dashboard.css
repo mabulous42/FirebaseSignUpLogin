@@ -14,7 +14,7 @@ button {
 }
 
 main {
-    margin-top: 10vh;
+    padding-top: 10vh;
     height: 90vh;
 }
 
@@ -27,20 +27,24 @@ nav {
 .left,
 .middle,
 .right {
-    height: 100%;
+    width: 25%;
+    height: 100vh;
     background-color: rgb(24,25,26);
 }
 
 .middle {
-    height: 100%;
+    width: 50%;
+    height: 100vh;
     background-color: rgb(24, 25, 26);
-    background-color: green;
+    background-color: red;
+    padding-bottom: 10vh;
 }
 
 .inner-middle {
     height: 100%;
+    /* margin-top: 105vh; */
     background-color: rgb(24, 25, 26);
-    background-color: red;
+    background-color: blue;
 }
 .story-div {
     height: 40vh;
@@ -75,8 +79,9 @@ nav {
 #myPostModal {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.664);
-    top: -10vh;
+    top: 10vh;
     left: 0;
+    right: 0;
     z-index: 50;
 }
 
@@ -125,6 +130,30 @@ input {
     background-color: rgb(58,59,60);
 }
 
+.pics-div{
+    height: 2rem;
+}
+
+.pics{
+    width: 2rem;
+    height: 2rem;
+}
+
+.comment-input{
+    background-color: rgb(58,59,60);
+}
+
 ::-webkit-scrollbar{
     display: none;
 }
+
+/* @media (max-width: 1115px) {
+    .right{
+        display: none;
+    }
+
+    .middle{
+        width: 75%;
+    }
+
+} */
