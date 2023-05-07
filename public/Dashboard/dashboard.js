@@ -4,6 +4,8 @@ let showPostTag = document.getElementById("show-post");
 let writeAPostTag = document.getElementById("open-post-modal");
 let whatsOnYourMindTag = document.getElementById("on-your-mind");
 
+
+
 postModal.style.visibility = "hidden";
 
 let currentUser = JSON.parse(localStorage.getItem("CU"));
@@ -11,11 +13,17 @@ console.log(currentUser);
 
 console.log(currentUser.name);
 userName.innerHTML = currentUser.name;
-// firebase.auth().signOut().then(() => {
-//     // Sign-out successful.
-//   }).catch((error) => {
-//     // An error happened.
-//   });
+
+
+function signOut() {
+    firebase.auth().signOut().then(() => {
+        // Sign-out successful.
+        window.location.href = "../index.html";
+      }).catch((error) => {
+        // An error happened.
+        alert(error);
+      });    
+}
 
 
 function writeSomething() {
@@ -76,10 +84,8 @@ function enableButton() {
 }
 
 let content = document.getElementById("content");
-let num = Number(1);
 function createPost() {
     let data = {
-        id: num,
         author: currentUser.name,
         content: content.value,
         isLike: false
@@ -90,10 +96,9 @@ function createPost() {
         .then(() => {
             console.log("Document successfully written!");
             // window.location.href = "blog.html";
-            
+
             content.value = "";
             postModal.style.visibility = "hidden";
-            num++;
             displayAllPost();
 
         })
@@ -109,8 +114,7 @@ function displayAllPost() {
         querySnapshot.forEach((doc, index) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-            console.log(doc.data().isLike);
-            
+
             showPostTag.innerHTML += `
             <div class="rounded w-100 mb-3 p-3 my-post-div">
                 <div class="d-flex align-items-center pix-div">
@@ -127,7 +131,7 @@ function displayAllPost() {
                 </div>
                 <hr class="mb-1">
                 <div class="d-flex align-items-center justify-content-center">
-                    <button id="likeBtn" class="like rounded w-100 text-center text-center d-flex align-items-center justify-content-center p-2" onclick="isLike(${doc.data().id})">
+                    <button id="likeBtn" class="like rounded w-100 text-center text-center d-flex align-items-center justify-content-center p-2" onclick="isLike()">
                         <div class="me-2">
                             <i class="fa-solid fa-thumbs-up like-icon"></i>
                         </div>
@@ -163,16 +167,18 @@ function displayAllPost() {
 }
 displayAllPost();
 
-let likedBtn = document.getElementById("likeBtn")
-function isLike(id) {
-    db.collection("Feeds").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc,index) => {
-            // doc.data() is never undefined for query doc snapshots
-            let liked = doc.data().id == id;
-            if (liked == true) {
+let likedBtn = document.getElementById("likeBtn");
+function isLike() {
+    var docRef = db.collection("Feeds").doc();
 
-                console.log(liked);
-            }
-        })
-    })
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
 }

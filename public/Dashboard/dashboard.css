@@ -20,7 +20,7 @@ main {
 
 nav {
     background-color: rgb(36, 37, 38);
-    color: white;
+    background-color: white;
 
 }
 
@@ -49,6 +49,15 @@ nav {
 .story-div {
     height: 40vh;
     background-color: rgb(36, 37, 38);
+}
+
+.btn11{
+    /* background-color: red; */
+    padding: 0.5rem;
+}
+
+.btn11:hover{
+    background-color: rgb(58, 59, 60);
 }
 
 .post-div {
