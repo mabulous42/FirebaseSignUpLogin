@@ -19,10 +19,10 @@ function signOut() {
     firebase.auth().signOut().then(() => {
         // Sign-out successful.
         window.location.href = "../index.html";
-      }).catch((error) => {
+    }).catch((error) => {
         // An error happened.
         alert(error);
-      });    
+    });
 }
 
 
@@ -46,7 +46,7 @@ function writeSomething() {
                                 <div class="w-100 px-3">
                                     <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content"
                                         cols="30" rows="6" placeholder="What's on your mind, ${currentUser.name}"
-                                        onkeypress="enableButton()"></textarea>
+                                        oninput="enableButton()"></textarea>
                                 </div>
                                 <div class="px-3">
                                     <div
@@ -61,7 +61,7 @@ function writeSomething() {
                                             <div>E</div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary mt-3 w-100" id="post-btn" disabled
+                                    <button class="btn btn-primary mt-3 w-100" id="post-btn"
                                         onclick="createPost()">Post</button>
                                 </div>
                             </div>
@@ -79,8 +79,13 @@ function closePostModal() {
 }
 
 let postBtn = document.getElementById("post-btn");
+postBtn.disabled = true;
 function enableButton() {
-    postBtn.disabled = false;
+    if (content.value.trim() !== "") {
+        postBtn.disabled = false;
+    } else {
+        postBtn.disabled = true;
+    }
 }
 
 let content = document.getElementById("content");
@@ -96,7 +101,6 @@ function createPost() {
         .then(() => {
             console.log("Document successfully written!");
             // window.location.href = "blog.html";
-
             content.value = "";
             postModal.style.visibility = "hidden";
             displayAllPost();
@@ -107,14 +111,12 @@ function createPost() {
         });
 }
 
-let ref;
 function displayAllPost() {
     showPostTag.innerHTML = "";
     db.collection("Feeds").get().then((querySnapshot) => {
         querySnapshot.forEach((doc, index) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-
             showPostTag.innerHTML += `
             <div class="rounded w-100 mb-3 p-3 my-post-div">
                 <div class="d-flex align-items-center pix-div">
