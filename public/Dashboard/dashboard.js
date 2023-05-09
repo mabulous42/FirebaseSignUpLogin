@@ -1,3 +1,4 @@
+//getting my document by id from the html file
 let userName = document.getElementById("profile-name");
 let postModal = document.getElementById("myPostModal");
 let showPostTag = document.getElementById("show-post");
@@ -5,16 +6,15 @@ let writeAPostTag = document.getElementById("open-post-modal");
 let whatsOnYourMindTag = document.getElementById("on-your-mind");
 
 
-
+//hiding the modal that shows where to type and post to timeline by using visibility hidden
 postModal.style.visibility = "hidden";
 
-let currentUser = JSON.parse(localStorage.getItem("CU"));
-console.log(currentUser);
 
-console.log(currentUser.name);
-userName.innerHTML = currentUser.name;
+//displaying the current user name
+// userName.innerHTML = currentUser.name;
 
 
+//this function signs out the current user from the dashboard
 function signOut() {
     firebase.auth().signOut().then(() => {
         // Sign-out successful.
@@ -25,7 +25,7 @@ function signOut() {
     });
 }
 
-
+// this is a self invoke function that displays the field telling the user to write something to his/her timeling
 function writeSomething() {
     writeAPostTag.innerHTML = `
     <div id="write-post-modal" class="w-75 shadow rounded">
@@ -45,7 +45,7 @@ function writeSomething() {
         </div>
         <div class="w-100 px-3">
             <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content"
-                cols="30" rows="6" placeholder="What's on your mind, ${currentUser.name}"
+                cols="30" rows="6" placeholder="What's on your mind, USERNAME"
                 oninput="enableButton()"></textarea>
         </div>
         <div class="px-3">
@@ -65,33 +65,43 @@ function writeSomething() {
     </div>
     `
 }
+//self invoking the function
 writeSomething();
 
-
+//this is an onclick function that opens a modal to type in something
 function openPostModal() {
     postModal.style.visibility = "visible";
 }
 
+//this is an onclick function the closes the modal where you can actually type in something
 function closePostModal() {
     postModal.style.visibility = "hidden";
 }
 
+//getting the document by id of the post button that post whatever the user types in the input
 let postBtn = document.getElementById("post-btn");
+
+//displaying the button to avoid posting an empty input
 postBtn.disabled = true;
 
+//this function changed the state of the post button from disable = true to disable = false based on some conditions
 function enableButton() {
+    //checking if the input box is not empty, if it's not empty, the button should be activated
     if (content.value.trim() !== "") {
         postBtn.disabled = false;
     } else {
+        //if the input box is empty, the button should be disable back
         postBtn.disabled = true;
     }
 }
 
+//getting the input document by id from the html tag
 let content = document.getElementById("content");
 
+//this function collects data to be posted by the user and save to the database
 function createPost() {
     let data = {
-        author: currentUser.name,
+        // author: currentUser.displayName,
         content: content.value,
         isLike: false
     }
@@ -110,6 +120,7 @@ function createPost() {
         });
 }
 
+//this is a self invoke function that displays all the posts in the database by fetching from the database and then displays it
 function displayAllPost() {
     showPostTag.innerHTML = "";
     db.collection("Feeds").get().then((querySnapshot) => {
@@ -122,7 +133,7 @@ function displayAllPost() {
                     <h6
                         class="me-2 text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
                         A</h6>
-                    <h6 class="">${currentUser.name}</h6>
+                    <h6 class="">USERNAME</h6>
                 </div>
                 <div class="w-100">
                     <p>${doc.data().content}</p>
@@ -166,9 +177,13 @@ function displayAllPost() {
         });
     });
 }
+//self invoking function
 displayAllPost();
 
+//getting the like button document id from the html tag
 let likedBtn = document.getElementById("likeBtn");
+
+//this function checks if a post is liked, it unlike a liked post when clicked on and also like a post if is not liked yet
 function isLike(id) {
     var docRef = db.collection("Feeds").doc(id);
     console.log(id);
