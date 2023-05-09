@@ -15,7 +15,7 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 
-<body class="">
+<body>
     <nav class="navbar fixed-top navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <a class="navbar-brand fb-logo-link" href="#">
@@ -62,57 +62,62 @@
             </div>
         </div>
     </nav>
-    <main class="d-flex position-relative">
-        <div class="left   ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, eaque!</div>
-        <div class="middle d-flex align-items-center justify-content-center overflow-auto">
-            <div class="w-75 inner-middle py-4">
-                <div class="story-div w-100 mb-3 rounded"></div>
-                <div class="post-div w-100 mb-3 rounded position-relative" id="on-your-mind">
-                    <div class="p-3">
-                        <div class="d-flex align-items-center">
-                            <div class="me-2 pix-div">
-                                <p
-                                    class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
-                                    A</p>
+    <main class="bg-danger w-100">
+        <div class="d-flex position-relative">
+            <div class="left overflow-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, eaque!</div>
+            <!-- <div class="middle"></div> -->
+            <div class="middle d-flex align-items-center justify-content-center overflow-auto">
+                <div class="w-75 inner-middle py-4">
+                    <div class="story-div w-100 mb-3 rounded"></div>
+                    <div class="post-div w-100 mb-3 rounded position-relative" id="on-your-mind">
+                        <div class="p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="me-2 pix-div">
+                                    <p
+                                        class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
+                                        A</p>
+                                </div>
+                                <div class="w-100 rounded-pill post-box p-2 ps-3" onclick="openPostModal()">
+                                    What's on your mind, <span id="profile-name"></span>
+                                </div>
+    
                             </div>
-                            <div class="w-100 rounded-pill post-box p-2 ps-3" onclick="openPostModal()">
-                                What's on your mind, <span id="profile-name"></span>
+                            <hr class="mb-2 mt-3">
+                            <div class="d-flex align-items-center justify-content-between w-100">
+                                <button class="btn11 rounded w-100 d-flex align-items-center justify-content-center">
+                                    <div>
+                                        <i class="fa-solid fa-video me-2 video11-icon"></i>
+                                    </div>
+                                    <div class="grey">Live video</div>
+                                </button>
+                                <button class="btn11 rounded w-100 d-flex align-items-center justify-content-center">
+                                    <div>
+                                        <i class="fa-solid fa-photo-film me-2 photo-icon"></i>
+                                    </div>
+                                    <div class="grey">Photo/Video</div>
+                                </button>
+                                <button class="btn11 rounded w-100 d-flex align-items justify-content">
+                                    <div>
+                                        <i class="fa-solid fa-face-smile me-2 smiley-icon"></i>
+                                    </div>
+                                    <div class="grey">Feeling/activity</div>
+                                </button>
                             </div>
-
-                        </div>
-                        <hr class="mb-2 mt-3">
-                        <div class="d-flex align-items-center justify-content-between w-100" >
-                            <button class="btn11 rounded w-100 d-flex align-items-center justify-content-center">
-                                <div>
-                                    <i class="fa-solid fa-video me-2 video11-icon"></i>
-                                </div>
-                                <div class="grey">Live video</div>
-                            </button>
-                            <button class="btn11 rounded w-100 d-flex align-items-center justify-content-center">
-                                <div>
-                                    <i class="fa-solid fa-photo-film me-2 photo-icon"></i>
-                                </div>
-                                <div class="grey">Photo/Video</div>
-                            </button>
-                            <button class="btn11 rounded w-100 d-flex align-items justify-content">
-                                <div>
-                                    <i class="fa-solid fa-face-smile me-2 smiley-icon"></i>
-                                </div>
-                                <div class="grey">Feeling/activity</div>
-                            </button>
                         </div>
                     </div>
-                </div>
-                <div class="" id="show-post">
-                </div>
-                <div class="position-absolute w-100 d-flex align-items-center justify-content-center" id="myPostModal">
-                    <div class="w-50 d-flex align-items-center justify-content-center" id="open-post-modal">
+                    <div class="" id="show-post">
+                    </div>
+                    <div class="position-absolute w-100 d-flex align-items-center justify-content-center" id="myPostModal">
+                        <div class="w-50 d-flex align-items-center justify-content-center" id="open-post-modal">
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="right overflow-auto">C</div>
         </div>
-        <div class="right overflow-auto">C</div>
     </main>
+    
+
 
     <script>
 

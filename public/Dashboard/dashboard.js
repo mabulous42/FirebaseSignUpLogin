@@ -29,42 +29,40 @@ function signOut() {
 function writeSomething() {
     writeAPostTag.innerHTML = `
     <div id="write-post-modal" class="w-75 shadow rounded">
-                                <div class="p-3 position-relative">
-                                    <h5 class="fw-bold text-center">Create Post</h5>
-                                    <i class="fa-solid fa-xmark position-absolute close-post-modal rounded-circle"
-                                        onclick="closePostModal()"></i>
-                                </div>
-                                <hr class="mb-2 mt-0">
-                                <div class="d-flex align-items-center py-2 px-3">
-                                    <div class="me-2 pix-div">
-                                        <p
-                                            class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
-                                            A</p>
-                                    </div>
-                                    <div>Mustapha Abbas</div>
-                                </div>
-                                <div class="w-100 px-3">
-                                    <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content"
-                                        cols="30" rows="6" placeholder="What's on your mind, ${currentUser.name}"
-                                        oninput="enableButton()"></textarea>
-                                </div>
-                                <div class="px-3">
-                                    <div
-                                        class="d-flex align-items-center justify-content-between border border-white w-100 rounded p-1">
-                                        <div>
-                                            <button class="add-to-post p-2">Add to your post</button>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <div>B</div>
-                                            <div>C</div>
-                                            <div>D</div>
-                                            <div>E</div>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary mt-3 w-100" id="post-btn"
-                                        onclick="createPost()">Post</button>
-                                </div>
-                            </div>
+        <div class="p-3 position-relative">
+            <h5 class="fw-bold text-center">Create Post</h5>
+            <i class="fa-solid fa-xmark position-absolute close-post-modal rounded-circle"
+                onclick="closePostModal()"></i>
+        </div>
+        <hr class="mb-2 mt-0">
+        <div class="d-flex align-items-center py-2 px-3">
+            <div class="me-2 pix-div">
+                <p
+                    class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
+                    A</p>
+            </div>
+            <div>Mustapha Abbas</div>
+        </div>
+        <div class="w-100 px-3">
+            <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content"
+                cols="30" rows="6" placeholder="What's on your mind, ${currentUser.name}"
+                oninput="enableButton()"></textarea>
+        </div>
+        <div class="px-3">
+            <div class="d-flex align-items-center justify-content-between border border-white w-100 rounded p-1">
+                <div>
+                    <button class="add-to-post p-2">Add to your post</button>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div>B</div>
+                    <div>C</div>
+                    <div>D</div>
+                    <div>E</div>
+                </div>
+            </div>
+            <button class="btn btn-primary mt-3 w-100" id="post-btn" onclick="createPost()">Post</button>
+        </div>
+    </div>
     `
 }
 writeSomething();
@@ -80,6 +78,7 @@ function closePostModal() {
 
 let postBtn = document.getElementById("post-btn");
 postBtn.disabled = true;
+
 function enableButton() {
     if (content.value.trim() !== "") {
         postBtn.disabled = false;
@@ -89,6 +88,7 @@ function enableButton() {
 }
 
 let content = document.getElementById("content");
+
 function createPost() {
     let data = {
         author: currentUser.name,
@@ -173,8 +173,25 @@ function isLike(id) {
     var docRef = db.collection("Feeds").doc(id);
     console.log(id);
 
+    // var washingtonRef = db.collection("cities").doc("DC");
+
+    // Set the "capital" field of the city 'DC'
+    return docRef.update({
+        isLike: true
+    })
+        .then(() => {
+            console.log("Document successfully updated!");
+            console.log("Document data:", doc.data().isLike);
+        })
+        .catch((error) => {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+
     // docRef.get().then((doc) => {
     //     if (doc.exists) {
+    //         // doc.data().isLike = true;
+    //         console.log(doc.data().isLike);
     //         console.log("Document data:", doc.data());
     //     } else {
     //         // doc.data() will be undefined in this case
