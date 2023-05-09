@@ -171,7 +171,7 @@ input {
     display: none;
 }
 
-/* @media (max-width: 1115px) {
+@media (max-width: 1115px) {
     .left{
         display: none;
     }
@@ -180,4 +180,4 @@ input {
         width: 75%;
     }
 
-} */
+}

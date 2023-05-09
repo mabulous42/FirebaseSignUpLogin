@@ -96,11 +96,10 @@ function createPost() {
         isLike: false
     }
 
-    // Add a new document in collection "cities"
+    // Add a new document in collection "feeds"
     db.collection("Feeds").doc().set(data)
         .then(() => {
             console.log("Document successfully written!");
-            // window.location.href = "blog.html";
             content.value = "";
             postModal.style.visibility = "hidden";
             displayAllPost();
@@ -114,7 +113,7 @@ function createPost() {
 function displayAllPost() {
     showPostTag.innerHTML = "";
     db.collection("Feeds").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc, index) => {
+        querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
             showPostTag.innerHTML += `
@@ -133,7 +132,7 @@ function displayAllPost() {
                 </div>
                 <hr class="mb-1">
                 <div class="d-flex align-items-center justify-content-center">
-                    <button id="likeBtn" class="like rounded w-100 text-center text-center d-flex align-items-center justify-content-center p-2" onclick="isLike()">
+                    <button id="likeBtn" class="like rounded w-100 text-center text-center d-flex align-items-center justify-content-center p-2" onclick="isLike('${doc.id}')">
                         <div class="me-2">
                             <i class="fa-solid fa-thumbs-up like-icon"></i>
                         </div>
@@ -170,17 +169,18 @@ function displayAllPost() {
 displayAllPost();
 
 let likedBtn = document.getElementById("likeBtn");
-function isLike() {
-    var docRef = db.collection("Feeds").doc();
+function isLike(id) {
+    var docRef = db.collection("Feeds").doc(id);
+    console.log(id);
 
-    docRef.get().then((doc) => {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
+    // docRef.get().then((doc) => {
+    //     if (doc.exists) {
+    //         console.log("Document data:", doc.data());
+    //     } else {
+    //         // doc.data() will be undefined in this case
+    //         console.log("No such document!");
+    //     }
+    // }).catch((error) => {
+    //     console.log("Error getting document:", error);
+    // });
 }
