@@ -1,5 +1,6 @@
 //getting my document by id from the html file
-let userName = document.getElementById("profile-name");
+let profileName = document.getElementById("profile-name");
+let userName = document.getElementById("user-name");
 let postModal = document.getElementById("myPostModal");
 let showPostTag = document.getElementById("show-post");
 let writeAPostTag = document.getElementById("open-post-modal");
@@ -9,9 +10,30 @@ let whatsOnYourMindTag = document.getElementById("on-your-mind");
 //hiding the modal that shows where to type and post to timeline by using visibility hidden
 postModal.style.visibility = "hidden";
 
+//declaring a variable to save the name of the current user
+let currentUser;
 
-//displaying the current user name
-// userName.innerHTML = currentUser.name;
+//getting the displayName of the current user
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        var uid = user.uid;
+        console.log(user);
+        //displaying the current user name
+        profileName.innerHTML = user.displayName;
+        userName.innerHTML = user.displayName;
+        //passing the displayName into variable currentUser
+        currentUser = user.displayName;
+        // ...
+    } else {
+        // User is signed out
+        // ...
+        // document.getElementById("display-null").style.display = "none";
+        window.location.href = "../index.html"
+    }
+});
+
 
 
 //this function signs out the current user from the dashboard
@@ -24,6 +46,8 @@ function signOut() {
         alert(error);
     });
 }
+
+
 
 // this is a self invoke function that displays the field telling the user to write something to his/her timeling
 function writeSomething() {
@@ -45,7 +69,7 @@ function writeSomething() {
         </div>
         <div class="w-100 px-3">
             <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content"
-                cols="30" rows="6" placeholder="What's on your mind, USERNAME"
+                cols="30" rows="6" placeholder="What's on your mind, ${currentUser}"
                 oninput="enableButton()"></textarea>
         </div>
         <div class="px-3">
@@ -101,7 +125,7 @@ let content = document.getElementById("content");
 //this function collects data to be posted by the user and save to the database
 function createPost() {
     let data = {
-        // author: currentUser.displayName,
+        author: currentUser,
         content: content.value,
         isLike: false
     }
@@ -133,7 +157,7 @@ function displayAllPost() {
                     <h6
                         class="me-2 text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
                         A</h6>
-                    <h6 class="">USERNAME</h6>
+                    <h6 class="">${doc.data().author}</h6>
                 </div>
                 <div class="w-100">
                     <p>${doc.data().content}</p>
@@ -191,17 +215,17 @@ function isLike(id) {
     // var washingtonRef = db.collection("cities").doc("DC");
 
     // Set the "capital" field of the city 'DC'
-    return docRef.update({
-        isLike: true
-    })
-        .then(() => {
-            console.log("Document successfully updated!");
-            console.log("Document data:", doc.data().isLike);
-        })
-        .catch((error) => {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
+    // return docRef.update({
+    //     isLike: true
+    // })
+    //     .then(() => {
+    //         console.log("Document successfully updated!");
+    //         console.log("Document data:", doc.data().isLike);
+    //     })
+    //     .catch((error) => {
+    //         // The document probably doesn't exist.
+    //         console.error("Error updating document: ", error);
+    //     });
 
     // docRef.get().then((doc) => {
     //     if (doc.exists) {
@@ -215,4 +239,9 @@ function isLike(id) {
     // }).catch((error) => {
     //     console.log("Error getting document:", error);
     // });
+}
+
+//this function navigate from the dashboard to the profile page
+function gotoProfile() {
+    window.location.href = "../Profile/profile.html"
 }

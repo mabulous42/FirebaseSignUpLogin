@@ -8,23 +8,23 @@ function signUp(ev) {
     if (password.value.length < 8) {
         alert("Password must be atleast 8 characters long")
     } else {
-        let data = {
-            name: userName.value,
-            email: email.value,
-            password: password.value 
-        }
-        userData.push(data);
-        localStorage.setItem("users", JSON.stringify(userData));
         firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
             .then((userCredential) => {
                 // Signed in 
                 var user = userCredential.user;
-                alert("Signed up successfully");
-                userName.value = "";
-                email.value = "";
-                password.value = "";
-                console.log(user);
-                window.location.href = "../index.html"
+                user.updateProfile({
+                    displayName: userName.value,
+                }).then(() => {
+                    alert("Signed up successfully");
+                    userName.value = "";
+                    email.value = "";
+                    password.value = "";
+                    console.log(user);
+                    window.location.href = "../index.html"
+                }).catch((error) => {
+                    // An error occurred
+                    // ...
+                });
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -32,4 +32,9 @@ function signUp(ev) {
                 alert(errorMessage);
             });
     }
+}
+
+function gotoSignInPage(ev) {
+    ev.preventDefault();
+    window.location.href = "../index.html";
 }

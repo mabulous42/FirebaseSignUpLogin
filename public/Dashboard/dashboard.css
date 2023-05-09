@@ -178,6 +178,11 @@ input {
     background-color: rgb(89, 89, 90);
 }
 
+#profile-name{
+    font-weight: 600;
+    font-size: 18px;
+}
+
 ::-webkit-scrollbar{
     /* display: none; */
 }

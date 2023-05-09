@@ -21,3 +21,8 @@ function signIn(ev) {
         alert(errorMessage);
       });
 }
+
+function gotoSignUpPage(ev) {
+    ev.preventDefault();
+    window.location.href = "./SignUp/signup.html";
+}
