@@ -6,7 +6,7 @@ let showPostTag = document.getElementById("show-post");
 let writeAPostTag = document.getElementById("open-post-modal");
 let whatsOnYourMindTag = document.getElementById("on-your-mind");
 
-
+// document.getElementById("live-video").style.backgroundColor = "blue";
 
 
 //declaring a variable to save the name of the current user
@@ -56,45 +56,43 @@ function writeSomething() {
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/firebase.User
             var uid = user.uid;
-            console.log(user);
-
             writeAPostTag.innerHTML = `
-    <div id="write-post-modal" class="w-75 shadow rounded">
-        <div class="p-3 position-relative">
-            <h5 class="fw-bold text-center">Create Post</h5>
-            <i class="fa-solid fa-xmark position-absolute close-post-modal rounded-circle"
-                onclick="closePostModal()"></i>
-        </div>
-        <hr class="mb-2 mt-0">
-        <div class="d-flex align-items-center py-2 px-3">
-            <div class="me-2 pix-div">
-                <p
-                    class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
-                    A</p>
-            </div>
-            <div>${user.displayName}</div>
-        </div>
-        <div class="w-100 px-3">
-            <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content"
-                cols="30" rows="6" placeholder="What's on your mind, ${user.displayName}"
-                oninput="enableButton()"></textarea>
-        </div>
-        <div class="px-3">
-            <div class="d-flex align-items-center justify-content-between border border-white w-100 rounded p-1">
-                <div>
-                    <button class="add-to-post p-2">Add to your post</button>
+            <div id="write-post-modal" class="w-75 shadow rounded">
+                <div class="p-3 position-relative">
+                    <h5 class="fw-bold text-center">Create Post</h5>
+                    <i class="fa-solid fa-xmark position-absolute close-post-modal rounded-circle"
+                        onclick="closePostModal()"></i>
                 </div>
-                <div class="d-flex align-items-center">
-                    <div>B</div>
-                    <div>C</div>
-                    <div>D</div>
-                    <div>E</div>
+                <hr class="mb-2 mt-0">
+                <div class="d-flex align-items-center py-2 px-3">
+                    <div class="me-2 pix-div">
+                        <p
+                            class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
+                            A</p>
+                    </div>
+                    <div>${user.displayName}</div>
+                </div>
+                <div class="w-100 px-3">
+                    <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content"
+                        cols="30" rows="6" placeholder="What's on your mind, ${user.displayName}"
+                        oninput="enableButton()"></textarea>
+                </div>
+                <div class="px-3">
+                    <div class="d-flex align-items-center justify-content-between border border-white w-100 rounded p-1">
+                        <div>
+                            <button class="add-to-post p-2">Add to your post</button>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div>B</div>
+                            <div>C</div>
+                            <div>D</div>
+                            <div>E</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-3 w-100" id="post-btn" onclick="createPost()">Post</button>
                 </div>
             </div>
-            <button class="btn btn-primary mt-3 w-100" id="post-btn" onclick="createPost()">Post</button>
-        </div>
-    </div>
-    `
+            `
             // ...
         } else {
             // User is signed out
@@ -225,7 +223,7 @@ function displayAllPost() {
                         <div class="me-2">
                             <i class="fa-solid fa-thumbs-up like-icon"></i>
                         </div>
-                        <div class="like1-text">Like</div>
+                        <div class="like1-text">${doc.data().isLike == true ? 'Unlike' : 'Like'}</div>
                     </button>
                     <button class="comment rounded w-100 text-center d-flex align-items-center justify-content-center p-2">
                         <div class="me-2">
