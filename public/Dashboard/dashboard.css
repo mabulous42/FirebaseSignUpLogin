@@ -33,17 +33,14 @@ nav {
 }
 
 .left{
-    background-color: blue;
 }
 
 .right{
-    background-color: purple;
 }
 
 .middle {
     width: 50%;
     background-color: rgb(24, 25, 26);
-    background-color: red;
     padding-bottom: 10vh;
 }
 

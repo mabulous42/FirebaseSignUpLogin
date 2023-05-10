@@ -38,7 +38,7 @@ function displayAllPost() {
                 // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
             currentUserTag.innerHTML += `
-            <div class="rounded w-100 mb-3 p-3 my-post-div">
+            <div class="rounded w-100 mb-3 p-3 my-post-div w-100">
                 <div class="d-flex align-items-center pix-div">
                     <h6
                         class="me-2 text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix" id="profilepix">
@@ -91,5 +91,9 @@ function displayAllPost() {
 }
 
 displayAllPost();
+
+function gotoHome() {
+    window.location.href = "../Dashboard/dashboard.html";
+}
 
 
