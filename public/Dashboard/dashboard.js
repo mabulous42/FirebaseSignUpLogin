@@ -266,6 +266,7 @@ let likedBtn = document.getElementById("likeBtn");
 
 //this function checks if a post is liked, it unlike a liked post when clicked on and also like a post if is not liked yet
 function isLike(id) {
+    console.log(currentUser);
     var docRef = db.collection("Feeds").doc(id);
 
     docRef.get().then((doc) => {
@@ -273,10 +274,10 @@ function isLike(id) {
             console.log("Document data:", doc.data());
             console.log(doc.data().likedBy);
             console.log(doc.data().numberOfLikes);
-            if (doc.data().likedBy.includes(id)) {
+            if (doc.data().likedBy.includes(currentUser)) {
                 docRef.update({
                     // Atomically remove a region from the "regions" array field.
-                    likedBy: firebase.firestore.FieldValue.arrayRemove(id),
+                    likedBy: firebase.firestore.FieldValue.arrayRemove(currentUser),
                     //decreasing the number of likes by 1  
                     numberOfLikes: doc.data().numberOfLikes-1
                 })
@@ -295,7 +296,7 @@ function isLike(id) {
             } else {
                 // Atomically add a user that liked the post to "likedBy" array field.
                 docRef.update({
-                    likedBy: firebase.firestore.FieldValue.arrayUnion(id),
+                    likedBy: firebase.firestore.FieldValue.arrayUnion(currentUser),
                     //increasing the number of likes by 1
                     numberOfLikes: doc.data().numberOfLikes+1
                 })
