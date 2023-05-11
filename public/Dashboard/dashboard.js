@@ -51,55 +51,55 @@ function signOut() {
 
 // this is a self invoke function that displays the field telling the user to write something to his/her timeling
 function writeSomething() {
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/firebase.User
-            var uid = user.uid;
-            writeAPostTag.innerHTML = `
-            <div id="write-post-modal" class="w-75 shadow rounded">
-                <div class="p-3 position-relative">
-                    <h5 class="fw-bold text-center">Create Post</h5>
-                    <i class="fa-solid fa-xmark position-absolute close-post-modal rounded-circle"
-                        onclick="closePostModal()"></i>
-                </div>
-                <hr class="mb-2 mt-0">
-                <div class="d-flex align-items-center py-2 px-3">
-                    <div class="me-2 pix-div">
-                        <p
-                            class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
-                            A</p>
-                    </div>
-                    <div>${user.displayName}</div>
-                </div>
-                <div class="w-100 px-3">
-                    <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content"
-                        cols="30" rows="6" placeholder="What's on your mind, ${user.displayName}"
-                        oninput="enableButton()"></textarea>
-                </div>
-                <div class="px-3">
-                    <div class="d-flex align-items-center justify-content-between border border-white w-100 rounded p-1">
-                        <div>
-                            <button class="add-to-post p-2">Add to your post</button>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div>B</div>
-                            <div>C</div>
-                            <div>D</div>
-                            <div>E</div>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary mt-3 w-100" id="post-btn" onclick="createPost()">Post</button>
-                </div>
-            </div>
-            `
-            // ...
-        } else {
-            // User is signed out
-            // ...
+    // firebase.auth().onAuthStateChanged((user) => {
+    //     if (user) {
+    //         // User is signed in, see docs for a list of available properties
+    //         // https://firebase.google.com/docs/reference/js/firebase.User
+    //         var uid = user.uid;
+    //         writeAPostTag.innerHTML = `
+    //         <div id="write-post-modal" class="w-75 shadow rounded">
+    //             <div class="p-3 position-relative">
+    //                 <h5 class="fw-bold text-center">Create Post</h5>
+    //                 <i class="fa-solid fa-xmark position-absolute close-post-modal rounded-circle"
+    //                     onclick="closePostModal()"></i>
+    //             </div>
+    //             <hr class="mb-2 mt-0">
+    //             <div class="d-flex align-items-center py-2 px-3">
+    //                 <div class="me-2 pix-div">
+    //                     <p
+    //                         class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
+    //                         A</p>
+    //                 </div>
+    //                 <div>${user.displayName}</div>
+    //             </div>
+    //             <div class="w-100 px-3">
+    //                 <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content"
+    //                     cols="30" rows="6" placeholder="What's on your mind, ${user.displayName}"
+    //                     oninput="enableButton()"></textarea>
+    //             </div>
+    //             <div class="px-3">
+    //                 <div class="d-flex align-items-center justify-content-between border border-white w-100 rounded p-1">
+    //                     <div>
+    //                         <button class="add-to-post p-2">Add to your post</button>
+    //                     </div>
+    //                     <div class="d-flex align-items-center">
+    //                         <div>B</div>
+    //                         <div>C</div>
+    //                         <div>D</div>
+    //                         <div>E</div>
+    //                     </div>
+    //                 </div>
+    //                 <button class="btn btn-primary mt-3 w-100" id="post-btn" onclick="createPost()">Post</button>
+    //             </div>
+    //         </div>
+    //         `
+    //         // ...
+    //     } else {
+    //         // User is signed out
+    //         // ...
 
-        }
-    });
+    //     }
+    // });
     writeAPostTag.innerHTML = `
     <div id="write-post-modal" class="w-75 shadow rounded">
         <div class="p-3 position-relative">
@@ -141,7 +141,7 @@ function writeSomething() {
 //self invoking the function
 writeSomething();
 
-document.getElementById("cu").innerHTML = currentUser;
+// document.getElementById("cu").innerHTML = currentUser;
 
 //this is an onclick function that opens a modal to type in something
 function openPostModal() {
@@ -179,7 +179,8 @@ function createPost() {
     let data = {
         author: currentUser,
         content: content.value,
-        isLike: false
+        numberOfLikes: 0,
+        likedBy: []
     }
 
     // Add a new document in collection "feeds"
@@ -217,7 +218,11 @@ function displayAllPost() {
                 <div class="w-100">
                     <img src="../images/photo.webp" alt="" class="w-100">
                 </div>
-                <hr class="mb-1">
+                <div class="mt-2 mb-2">
+                    <span class="like-icon-div"><i class="bi bi-hand-thumbs-up-fill rounded-circle bg-primary like-icon"></i></span>
+                    <span>${doc.data().numberOfLikes} like(s)</span>
+                </div>
+                <hr class="mb-1 mt-1">
                 <div class="d-flex align-items-center justify-content-center">
                     <button id="likeBtn" class="like rounded w-100 text-center text-center d-flex align-items-center justify-content-center p-2" onclick="isLike('${doc.id}')">
                         <div class="me-2">
@@ -266,17 +271,21 @@ function isLike(id) {
     docRef.get().then((doc) => {
         if (doc.exists) {
             console.log("Document data:", doc.data());
-            console.log(doc.data().isLike);
-            if (doc.data().isLike == false) {
-                return docRef.update({
-                    isLike: true
+            console.log(doc.data().likedBy);
+            console.log(doc.data().numberOfLikes);
+            if (doc.data().likedBy.includes(id)) {
+                docRef.update({
+                    // Atomically remove a region from the "regions" array field.
+                    likedBy: firebase.firestore.FieldValue.arrayRemove(id),
+                    //decreasing the number of likes by 1  
+                    numberOfLikes: doc.data().numberOfLikes-1
                 })
                     .then(() => {
                         console.log("Document successfully updated!");
                         return docRef.get(); // Get the updated document
                     })
                     .then((doc) => {
-                        console.log('Updated value of myField:', doc.data().isLike);
+                        console.log('Updated value of myField:', doc.data().likedBy);
                         displayAllPost();
                     })
                     .catch((error) => {
@@ -284,15 +293,18 @@ function isLike(id) {
                         console.error("Error updating document: ", error);
                     });
             } else {
-                return docRef.update({
-                    isLike: false
+                // Atomically add a user that liked the post to "likedBy" array field.
+                docRef.update({
+                    likedBy: firebase.firestore.FieldValue.arrayUnion(id),
+                    //increasing the number of likes by 1
+                    numberOfLikes: doc.data().numberOfLikes+1
                 })
                     .then(() => {
                         console.log("Document successfully updated!");
                         return docRef.get(); // Get the updated document
                     })
                     .then((doc) => {
-                        console.log('Updated value of myField:', doc.data().isLike);
+                        console.log('Updated value of myField:', doc.data().likedBy);
                         displayAllPost();
                     })
                     .catch((error) => {
@@ -300,7 +312,6 @@ function isLike(id) {
                         console.error("Error updating document: ", error);
                     });
             }
-
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -308,7 +319,6 @@ function isLike(id) {
     }).catch((error) => {
         console.log("Error getting document:", error);
     });
-
 }
 
 //this function navigate from the dashboard to the profile page
@@ -326,7 +336,7 @@ function gotoProfile() {
 //             if (doc.data().isLike == false) {
 //                 likedBtn.style.backgroundColor = 'inherit';
 //             } else {
-//                 likedBtn.style.backgroundColor = 'blue';                
+//                 likedBtn.style.backgroundColor = 'blue';
 //             }
 //         } else {
 //             // doc.data() will be undefined in this case
