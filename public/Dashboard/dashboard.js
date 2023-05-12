@@ -8,7 +8,6 @@ let whatsOnYourMindTag = document.getElementById("on-your-mind");
 
 // document.getElementById("live-video").style.backgroundColor = "blue";
 
-
 //declaring a variable to save the name of the current user
 let currentUser;
 
@@ -47,59 +46,8 @@ function signOut() {
     });
 }
 
-
-
 // this is a self invoke function that displays the field telling the user to write something to his/her timeling
-function writeSomething() {
-    // firebase.auth().onAuthStateChanged((user) => {
-    //     if (user) {
-    //         // User is signed in, see docs for a list of available properties
-    //         // https://firebase.google.com/docs/reference/js/firebase.User
-    //         var uid = user.uid;
-    //         writeAPostTag.innerHTML = `
-    //         <div id="write-post-modal" class="w-75 shadow rounded">
-    //             <div class="p-3 position-relative">
-    //                 <h5 class="fw-bold text-center">Create Post</h5>
-    //                 <i class="fa-solid fa-xmark position-absolute close-post-modal rounded-circle"
-    //                     onclick="closePostModal()"></i>
-    //             </div>
-    //             <hr class="mb-2 mt-0">
-    //             <div class="d-flex align-items-center py-2 px-3">
-    //                 <div class="me-2 pix-div">
-    //                     <p
-    //                         class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
-    //                         A</p>
-    //                 </div>
-    //                 <div>${user.displayName}</div>
-    //             </div>
-    //             <div class="w-100 px-3">
-    //                 <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content"
-    //                     cols="30" rows="6" placeholder="What's on your mind, ${user.displayName}"
-    //                     oninput="enableButton()"></textarea>
-    //             </div>
-    //             <div class="px-3">
-    //                 <div class="d-flex align-items-center justify-content-between border border-white w-100 rounded p-1">
-    //                     <div>
-    //                         <button class="add-to-post p-2">Add to your post</button>
-    //                     </div>
-    //                     <div class="d-flex align-items-center">
-    //                         <div>B</div>
-    //                         <div>C</div>
-    //                         <div>D</div>
-    //                         <div>E</div>
-    //                     </div>
-    //                 </div>
-    //                 <button class="btn btn-primary mt-3 w-100" id="post-btn" onclick="createPost()">Post</button>
-    //             </div>
-    //         </div>
-    //         `
-    //         // ...
-    //     } else {
-    //         // User is signed out
-    //         // ...
-
-    //     }
-    // });
+function writeSomething() {    
     writeAPostTag.innerHTML = `
     <div id="write-post-modal" class="w-75 shadow rounded">
         <div class="p-3 position-relative">
@@ -141,7 +89,6 @@ function writeSomething() {
 //self invoking the function
 writeSomething();
 
-// document.getElementById("cu").innerHTML = currentUser;
 
 //this is an onclick function that opens a modal to type in something
 function openPostModal() {
@@ -180,7 +127,9 @@ function createPost() {
         author: currentUser,
         content: content.value,
         numberOfLikes: 0,
-        likedBy: []
+        likedBy: [],
+        numberOfComments: 0,
+        commentsBy: []
     }
 
     // Add a new document in collection "feeds"
@@ -204,57 +153,112 @@ function displayAllPost() {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-            showPostTag.innerHTML += `
-            <div class="rounded w-100 mb-3 p-3 my-post-div">
-                <div class="d-flex align-items-center pix-div">
-                    <h6
-                        class="me-2 text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
-                        A</h6>
-                    <h6 class="">${doc.data().author}</h6>
-                </div>
-                <div class="w-100">
-                    <p>${doc.data().content}</p>
-                </div>
-                <div class="w-100">
-                    <img src="../images/photo.webp" alt="" class="w-100">
-                </div>
-                <div class="mt-2 mb-2">
-                    <span class="like-icon-div"><i class="bi bi-hand-thumbs-up-fill rounded-circle bg-primary like-icon"></i></span>
-                    <span>${doc.data().numberOfLikes} like(s)</span>
-                </div>
-                <hr class="mb-1 mt-1">
-                <div class="d-flex align-items-center justify-content-center">
-                    <button id="likeBtn" class="like rounded w-100 text-center text-center d-flex align-items-center justify-content-center p-2" onclick="isLike('${doc.id}')">
-                        <div class="me-2">
-                            <i class="fa-solid fa-thumbs-up like-icon"></i>
-                        </div>
-                        <div class="like1-text">${doc.data().isLike == true ? 'Unlike' : 'Like'}</div>
-                    </button>
-                    <button class="comment rounded w-100 text-center d-flex align-items-center justify-content-center p-2">
-                        <div class="me-2">
-                            <i class="fa-sharp fa-solid fa-comment comment-icon"></i>
-                        </div>
-                        <div class="comment1-text">Comment</div>
-                    </button>
-                    <button class="share rounded w-100 text-center d-flex align-items-center justify-content-center p-2">
-                        <div class="me-2"><i class="fa-solid fa-share share-icon"></i></div>
-                        <div class="share1-text">Share</div>
-                    </button>
-                </div>
-                <hr class="mt-1">
-                <div class="d-flex align-items-center">
-                    <div class="pics-div me-2">
-                        <h6 class="pics bg-white text-black rounded-circle d-flex align-items-center justify-content-center">B</h6>
+            console.log(currentUser);
+            if (doc.data().likedBy.includes(currentUser)) {
+                showPostTag.innerHTML += `
+                <div class="rounded w-100 mb-3 p-3 my-post-div">
+                    <div class="d-flex align-items-center pix-div">
+                        <h6
+                            class="me-2 text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
+                            A</h6>
+                        <h6 class="">${doc.data().author}</h6>
                     </div>
-                    <div class="w-100 position-relative">
-                        <input type="text" name="" id="" placeholder="Write a comment..." class="comment-input p-1 ps-3 rounded-pill w-100">
-                        <button class="position-absolute comment-btn d-flex align-items-center justify-content-center rounded-circle">
-                        <i class="fa-solid fa-square-arrow-up-right send-comment"></i>
+                    <div class="w-100">
+                        <p>${doc.data().content}</p>
+                    </div>
+                    <div class="w-100">
+                        <img src="../images/photo.webp" alt="" class="w-100">
+                    </div>
+                    <div class="mt-2 mb-2">
+                        <span class="like-icon-div"><i class="bi bi-hand-thumbs-up-fill rounded-circle bg-primary like-icon"></i></span>
+                        <span>${doc.data().numberOfLikes} like(s)</span>
+                    </div>
+                    <hr class="mb-1 mt-1">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <button id="likeBtn" class="liked rounded w-100 text-center text-center d-flex align-items-center justify-content-center p-2" onclick="isLike('${doc.id}')">
+                            <div>
+                                <i class="fa-solid fa-thumbs-up like-icon text-primary"></i>
+                            </div>
+                            <div class="like1-text text-primary">Like</div>
+                        </button>
+                        <button class="comment rounded w-100 text-center d-flex align-items-center justify-content-center p-2">
+                            <div class="me-2">
+                                <i class="fa-sharp fa-solid fa-comment comment-icon"></i>
+                            </div>
+                            <div class="comment1-text">Comment</div>
+                        </button>
+                        <button class="share rounded w-100 text-center d-flex align-items-center justify-content-center p-2">
+                            <div class="me-2"><i class="fa-solid fa-share share-icon"></i></div>
+                            <div class="share1-text">Share</div>
                         </button>
                     </div>
+                    <hr class="mt-1">
+                    <div class="d-flex align-items-center">
+                        <div class="pics-div me-2">
+                            <h6 class="pics bg-white text-black rounded-circle d-flex align-items-center justify-content-center">B</h6>
+                        </div>
+                        <div class="w-100 position-relative">
+                            <input type="text" name="" id="" placeholder="Write a comment..." class="comment-input p-1 ps-3 rounded-pill w-100">
+                            <button class="position-absolute comment-btn d-flex align-items-center justify-content-center rounded-circle">
+                            <i class="fa-solid fa-square-arrow-up-right send-comment"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            `
+                `
+            } else {
+                showPostTag.innerHTML += `
+                <div class="rounded w-100 mb-3 p-3 my-post-div">
+                    <div class="d-flex align-items-center pix-div">
+                        <h6
+                            class="me-2 text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
+                            A</h6>
+                        <h6 class="">${doc.data().author}</h6>
+                    </div>
+                    <div class="w-100">
+                        <p>${doc.data().content}</p>
+                    </div>
+                    <div class="w-100">
+                        <img src="../images/photo.webp" alt="" class="w-100">
+                    </div>
+                    <div class="mt-2 mb-2">
+                        <span class="like-icon-div"><i class="bi bi-hand-thumbs-up-fill rounded-circle bg-primary like-icon"></i></span>
+                        <span>${doc.data().numberOfLikes} like(s)</span>
+                    </div>
+                    <hr class="mb-1 mt-1">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <button id="likeBtn" class="liked rounded w-100 text-center text-center d-flex align-items-center justify-content-center p-2" onclick="isLike('${doc.id}')">
+                            <div>
+                                <i class="fa-solid fa-thumbs-up like-icon"></i>
+                            </div>
+                            <div class="like1-text">Like</div>
+                        </button>
+                        <button class="comment rounded w-100 text-center d-flex align-items-center justify-content-center p-2">
+                            <div class="me-2">
+                                <i class="fa-sharp fa-solid fa-comment comment-icon"></i>
+                            </div>
+                            <div class="comment1-text">Comment</div>
+                        </button>
+                        <button class="share rounded w-100 text-center d-flex align-items-center justify-content-center p-2">
+                            <div class="me-2"><i class="fa-solid fa-share share-icon"></i></div>
+                            <div class="share1-text">Share</div>
+                        </button>
+                    </div>
+                    <hr class="mt-1">
+                    <div class="d-flex align-items-center">
+                        <div class="pics-div me-2">
+                            <h6 class="pics bg-white text-black rounded-circle d-flex align-items-center justify-content-center">B</h6>
+                        </div>
+                        <div class="w-100 position-relative">
+                            <input type="text" name="" id="" placeholder="Write a comment..." class="comment-input p-1 ps-3 rounded-pill w-100">
+                            <button class="position-absolute comment-btn d-flex align-items-center justify-content-center rounded-circle">
+                            <i class="fa-solid fa-square-arrow-up-right send-comment"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `
+            }
         });
     });
 }
@@ -271,12 +275,10 @@ function isLike(id) {
 
     docRef.get().then((doc) => {
         if (doc.exists) {
-            console.log("Document data:", doc.data());
-            console.log(doc.data().likedBy);
-            console.log(doc.data().numberOfLikes);
+            console.log("Document data:", doc.data())
             if (doc.data().likedBy.includes(currentUser)) {
                 docRef.update({
-                    // Atomically remove a region from the "regions" array field.
+                    // Atomically remove a user that unliked the post to "likedBy" array field.
                     likedBy: firebase.firestore.FieldValue.arrayRemove(currentUser),
                     //decreasing the number of likes by 1  
                     numberOfLikes: doc.data().numberOfLikes-1
@@ -294,8 +296,8 @@ function isLike(id) {
                         console.error("Error updating document: ", error);
                     });
             } else {
-                // Atomically add a user that liked the post to "likedBy" array field.
                 docRef.update({
+                    // Atomically add a user that liked the post to "likedBy" array field.
                     likedBy: firebase.firestore.FieldValue.arrayUnion(currentUser),
                     //increasing the number of likes by 1
                     numberOfLikes: doc.data().numberOfLikes+1
@@ -326,25 +328,3 @@ function isLike(id) {
 function gotoProfile() {
     window.location.href = "../Profile/profile.html"
 }
-
-//this function toggles the background color of the like button to indicate if it is liked or not
-// function likeButton() {
-//     var docRef = db.collection("Feeds").doc("g3I5ggFPQD5LlLoTlmu7");
-
-//     docRef.get().then((doc) => {
-//         if (doc.exists) {
-//             console.log("Document data:", doc.data());
-//             if (doc.data().isLike == false) {
-//                 likedBtn.style.backgroundColor = 'inherit';
-//             } else {
-//                 likedBtn.style.backgroundColor = 'blue';
-//             }
-//         } else {
-//             // doc.data() will be undefined in this case
-//             console.log("No such document!");
-//         }
-//     }).catch((error) => {
-//         console.log("Error getting document:", error);
-//     });
-// }
-// likeButton();

@@ -2,7 +2,6 @@ let userName = document.getElementById("user-name");
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 
-let userData = JSON.parse(localStorage.getItem("users")) || [];
 function signUp(ev) {
     ev.preventDefault();
     if (password.value.length < 8) {

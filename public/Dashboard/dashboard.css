@@ -46,6 +46,7 @@ nav {
 
 .inner-middle {
     height: 100%;
+    width: 75%;
     /* margin-top: 105vh; */
     background-color: rgb(24, 25, 26);
     /* background-color: blue; */
@@ -137,7 +138,7 @@ input {
     background-color: rgb(36,37,38);
 }
 
-.like:hover,
+.liked:hover,
 .comment:hover,
 .share:hover{
     background-color: rgb(58,59,60);
@@ -187,7 +188,7 @@ input {
 
 .like-icon{
     padding: 0.3rem 0.4rem;
-    font-size: 0.7rem;
+    font-size: 1rem;
 }
 
 ::-webkit-scrollbar{
@@ -201,6 +202,34 @@ input {
 
     .middle{
         width: 75%;
+    }
+
+}
+
+@media (max-width: 428px) {
+    .left{
+        display: none;
+    }
+
+    .middle{
+        width: 100%;
+    }
+
+    .inner-middle{
+        width: 100%;
+    }
+
+    .right{
+        display: none;
+    }
+
+    main{
+        padding-top: 6vh;
+        height: 94vh;
+    }
+
+    body{
+        height: 100vh;
     }
 
 }
