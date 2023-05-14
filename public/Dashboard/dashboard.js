@@ -156,32 +156,47 @@ async function createPost() {
 //this is a self invoke function that displays all the posts in the database by fetching from the database and then displays it
 async function displayAllPost() {
     showPostTag.innerHTML = "";
-    await db.collection("Feeds").get().then((querySnapshot) => {
+    await db.collection("Feeds").orderBy("time", "desc").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
             console.log(currentUser);
             let createdAt;
+
             let timeStampHour = doc.data().time.toDate().getHours();
             let timeStampMinutes = doc.data().time.toDate().getMinutes();
             let timeStampYear = doc.data().time.toDate().getYear() + 1900;
             let timeStampDay = doc.data().time.toDate().getDay();
+            let timeStampDate = doc.data().time.toDate().getDate();
             let timeStampMonth = doc.data().time.toDate().getMonth() + 1;
-            let postMinutes = date.getMinutes() - timeStampMinutes;
-            console.log("Hour: " +timeStampHour);
-            console.log("minutes: " +timeStampMinutes);
-            console.log("Day: " +timeStampDay);
-            console.log("Month: " +timeStampMonth);
-            console.log("Year: " +timeStampYear);
-            if (timeStampHour == date.getHours() && postMinutes < 1) {
-                createdAt = "Just Now"
-            } 
-            // else if (condition) {
-                
-            // }
-            else {
-                createdAt = postMinutes + "m";
+
+            let timeStampPostDate = doc.data().time.toDate();
+            let postMinutes = Math.round((date - timeStampPostDate) / (1000 * 60));
+            console.log("time diff: " + postMinutes);
+
+            console.log("Hour: " + timeStampHour);
+            console.log("minutes: " + timeStampMinutes);
+            console.log("Day: " + timeStampDay);
+            console.log("Month: " + timeStampMonth);
+            console.log("Year: " + timeStampYear);
+            console.log("Date: " + timeStampDate);
+
+            if (postMinutes < 1) {
+                createdAt = "Just now";
+            } else if (postMinutes === 1) {
+                createdAt = '1 minute ago';
+            } else if (postMinutes < 60) {
+                createdAt = `${postMinutes} minutes ago`;
+            } else if (postMinutes < 120) {
+                createdAt = '1 hour ago';
+            } else if (postMinutes < 1440) {
+                createdAt = `${Math.floor(postMinutes / 60)} hours ago`;
+            } else if (postMinutes < 2880) {
+                createdAt = '1 day ago';
+            } else {
+                createdAt = `${Math.floor(postMinutes / 1440)} days ago`;
             }
+
             showPostTag.innerHTML += `
                 <div class="rounded w-100 mb-3 p-3 my-post-div">
                     <div class="d-flex  pix-div mb-3">
@@ -277,14 +292,14 @@ function sendComment(id) {
             // Set the "capital" field of the city 'DC'
             return docRef.update({
                 commentsBy: firebase.firestore.FieldValue.arrayUnion(commentsData),
-                numberOfComments: doc.data().commentsBy.length+1
+                numberOfComments: doc.data().commentsBy.length + 1
             })
                 .then(() => {
                     console.log("Document successfully updated!");
                     return docRef.get(); // Get the updated document
                 })
                 .then((doc) => {
-                    console.log('Updated value of myField:', doc.data().commentsBy);                    
+                    console.log('Updated value of myField:', doc.data().commentsBy);
                     displayAllPost();
                 })
                 .catch((error) => {
