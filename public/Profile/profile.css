@@ -5,13 +5,29 @@
     color: white;
 }
 
-main{
-    height: 100vh;
+button {
+    background-color: inherit;
+}
+
+.fb-logo-link {
+    width: 3%;
+}
+
+main {
+    /* padding-top: 10vh; */
+    height: 90vh;
+    background-color: red;
+}
+
+nav {
+    background-color: rgb(36, 37, 38);
+    background-color: white;
+
 }
 
 .left,
 .right{
-    height: 100vh;
+    height: 90vh;
 }
 
 .pix-div {
@@ -77,3 +93,48 @@ input{
 button {
     background-color: inherit;
 }
+
+.content-div{
+    background-color: green;
+    height: 90vh;
+    margin-top: 10vh;
+}
+
+.cover-photo-div{
+    height: 90vh;
+}
+
+.cover-photo{
+    height: 45vh;
+}
+
+.upload-cover-photo{
+    bottom: 5vh;
+    right: 2vh;
+}
+
+.profile-picture-div{
+    width: 95%;
+    height: 40vh;
+}
+
+.picture-circle{
+    /* height: 10rem; */
+}
+
+.picture{
+    width: 12rem;
+    height: 12rem;
+    background-color: blue;
+}
+
+.cam-div{
+    bottom: 0;
+    /* left: 0; */
+}
+
+/* .cam{
+    font-size: 1.5rem;
+    background-color: rgb(58,59,60);
+    padding: 0.1rem 0.5rem 0.3rem 0.5rem;
+} */

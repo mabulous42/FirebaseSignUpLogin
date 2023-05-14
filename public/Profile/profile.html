@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="https://kit.fontawesome.com/85310ecdcf.js" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -16,14 +17,96 @@
 </head>
 
 <body>
-    <main class="w-100 d-flex align-items-center justify-content-center">
-        <div class="w-25 left">
-            <div class="mt-5">
-                <button class="btn btn-success" onclick="gotoHome()">Home</button>
+    <main>
+        <nav class="navbar fixed-top navbar-expand-lg">
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+                <a class="navbar-brand fb-logo-link" href="#">
+                    <img src="../images/facebook-logo-2019.svg" alt="" class="fb-logo w-100">
+                </a>
+                <div>
+                    <input class="form-control me-2 rounded-pill" type="search" placeholder="Search"
+                        aria-label="Search">
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li>
+                            <button class="profile-btn rounded p-2 w-100 btn btn-success" onclick="gotoProfile()"><span
+                                    id="profile-nam">Profile</span></button>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">Disabled</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="" role="">
+                    <button class="btn btn-outline-success" type="submit" onclick="signOut()">SIgn Out</button>
+                </div>
             </div>
-        </div>
-        <div class="w-50 right overflow-auto">
-            <div id="showCurrent-userPost" class="w-75 mx-auto"></div>
+        </nav>
+        <div class="content-div">
+            <div class="cover-photo-div">
+                <div class="cover-photo position-relative w-75 bg-warning text-center rounded-bottom mx-auto">
+                    cover-photo
+                    <div class="position-absolute upload-cover-photo">
+                        <button class="btn btn-success">Upload cover photo</button>
+                    </div>
+                </div>
+                <div class="w-75 bg-danger mx-auto mt-2">
+                    <div class="mx-auto bg-success profile-picture-div">
+                        <div class="d-flex">
+                            <div class="picture-circle">
+                                <div class="picture rounded-circle position-relative">
+                                    <div class="position-absolute mx-5 cam-div">
+                                        <form class="mt-5">
+                                            <input type="file" id="profile-picture" onchange="uploadImage(event)">
+                                            <button class="btn btn-success" onclick="savePictureToStorage(event)">Upload Image</button>
+                                        </form>
+                                        <!-- <i class="bi bi-camera cam rounded-circle"></i> -->
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>bb</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 d-flex align-items-center justify-content-center">
+                <div class="w-25 left">
+                    <div class="mt-5 bg-danger">
+                        <button class="btn btn-success" onclick="gotoHome()">Home</button>
+                    </div>
+                </div>
+                <div class="w-50 right overflow-auto pt-2">
+                    <div id="showCurrent-userPost" class="w-75 mx-auto"></div>
+                </div>
+            </div>
         </div>
     </main>
 

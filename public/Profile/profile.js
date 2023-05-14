@@ -1,4 +1,5 @@
 let currentUserTag = document.getElementById("showCurrent-userPost");
+let profilePicture = document.getElementById("profile-picture");
 
 //declaring a variable to save the name of the current user
 let currentUser;
@@ -11,9 +12,6 @@ firebase.auth().onAuthStateChanged((user) => {
         // https://firebase.google.com/docs/reference/js/firebase.User
         var uid = user.uid;
         console.log(user);
-        //displaying the current user name
-        // profileName.innerHTML = user.displayName;
-        // userName.innerHTML = user.displayName;
         //passing the displayName into variable currentUser
         currentUser = user.displayName;
         // ...
@@ -94,6 +92,26 @@ displayAllPost();
 
 function gotoHome() {
     window.location.href = "../Dashboard/dashboard.html";
+}
+
+function uploadImage(event) {
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    console.log(file);
+
+    reader.addEventListener('load', (e)=>{
+        console.log(e);
+        let imgUrl = e.target.result;
+        console.log(imgUrl);
+    })
+
+    if (file) {
+        reader.readAsDataURL(file)
+    }
+}
+
+function savePictureToStorage(event) {
+    
 }
 
 
