@@ -3,7 +3,7 @@ let profilePicture = document.getElementById("profile-picture");
 
 //declaring a variable to save the name of the current user
 let currentUser;
-let firstLetter;
+let thisUser;
 
 //getting the displayName of the current user
 firebase.auth().onAuthStateChanged((user) => {
@@ -14,6 +14,8 @@ firebase.auth().onAuthStateChanged((user) => {
         console.log(user);
         //passing the displayName into variable currentUser
         currentUser = user.displayName;
+        thisUser = user
+        console.log(thisUser);
         // ...
     } else {
         // User is signed out
@@ -34,8 +36,8 @@ function displayAllPost() {
                 console.log("Perfect");
 
                 // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-            currentUserTag.innerHTML += `
+                console.log(doc.id, " => ", doc.data());
+                currentUserTag.innerHTML += `
             <div class="rounded w-100 mb-3 p-3 my-post-div w-100">
                 <div class="d-flex align-items-center pix-div">
                     <h6
@@ -83,7 +85,7 @@ function displayAllPost() {
             </div>
             `
             }
-            
+
         });
     });
 }
@@ -99,7 +101,7 @@ function uploadImage(event) {
     let reader = new FileReader();
     console.log(file);
 
-    reader.addEventListener('load', (e)=>{
+    reader.addEventListener('load', (e) => {
         console.log(e);
         let imgUrl = e.target.result;
         console.log(imgUrl);
@@ -111,7 +113,59 @@ function uploadImage(event) {
 }
 
 function savePictureToStorage(event) {
-    
+    event.preventDefault();
+    let file = profilePicture.files[0]
+    let imgName = profilePicture.files[0].name
+
+    // Upload file and metadata to the object 'images/mountains.jpg'
+    var uploadTask = storage.child(imgName).put(file);
+
+    // Listen for state changes, errors, and completion of the upload.
+    uploadTask.on('state_changed',
+        (snapshot) => {
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                    console.log('Upload is paused');
+                    break;
+                case firebase.storage.TaskState.RUNNING: // or 'running'
+                    console.log('Upload is running');
+                    break;
+            }
+        },
+        (error) => {
+            // A full list of error codes is available at
+            // https://firebase.google.com/docs/storage/web/handle-errors
+            switch (error.code) {
+                case 'storage/unauthorized':
+                    // User doesn't have permission to access the object
+                    break;
+                case 'storage/canceled':
+                    // User canceled the upload
+                    break;
+
+                // ...
+
+                case 'storage/unknown':
+                    // Unknown error occurred, inspect error.serverResponse
+                    break;
+            }
+        },
+        () => {
+            // Upload completed successfully, now we can get the download URL
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                console.log('File available at', downloadURL);
+                thisUser.updateProfile({
+                    photoURL: downloadURL
+                }).then(() => {
+                    console.log("Profile successfully updated");
+                }).catch((error) => {
+                    console.log(error.message);
+                });
+            });            
+        });
 }
 
 
