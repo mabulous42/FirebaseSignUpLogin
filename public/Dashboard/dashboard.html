@@ -17,14 +17,15 @@
 </head>
 
 <body>
+
     <nav class="navbar fixed-top navbar-expand-lg">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <a class="navbar-brand fb-logo-link" href="#">
                 <img src="../images/facebook-logo-2019.svg" alt="" class="fb-logo w-100">
             </a>
-            <form class="d-flex" role="search">
+            <div>
                 <input class="form-control me-2 rounded-pill" type="search" placeholder="Search" aria-label="Search">
-            </form>
+            </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -35,6 +36,10 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li>
+                        <button class="profile-btn rounded p-2 w-100 btn btn-success" onclick="gotoProfile()"><span
+                                id="profile-nam">Profile</span></button>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
@@ -67,7 +72,8 @@
         <div class="d-flex position-relative w-100">
             <div class="left overflow-auto">
                 <div class="mx-1 my-1">
-                    <button class="profile-btn rounded p-2 w-100" onclick="gotoProfile()"><span id="profile-name"></span></button>
+                    <button class="profile-btn rounded p-2 w-100" onclick="gotoProfile()"><span
+                            id="profile-name"></span></button>
                 </div>
             </div>
             <div class="middle d-flex align-items-center justify-content-center overflow-auto">
@@ -84,11 +90,12 @@
                                 <div class="w-100 rounded-pill post-box p-2 ps-3" onclick="openPostModal()">
                                     What's on your mind, <span id="user-name"></span>
                                 </div>
-    
+
                             </div>
                             <hr class="mb-2 mt-3">
                             <div class="d-flex align-items-center justify-content-between w-100">
-                                <button class="btn11 rounded w-100 d-flex align-items-center justify-content-center" id="live-video">
+                                <button class="btn11 rounded w-100 d-flex align-items-center justify-content-center"
+                                    id="live-video">
                                     <div>
                                         <i class="fa-solid fa-video me-2 video11-icon"></i>
                                     </div>
@@ -111,7 +118,8 @@
                     </div>
                     <div class="" id="show-post">
                     </div>
-                    <div class="position-absolute w-100 d-flex align-items-center justify-content-center" id="myPostModal">
+                    <div class="position-absolute w-100 d-flex align-items-center justify-content-center"
+                        id="myPostModal">
                         <div class="w-50 d-flex align-items-center justify-content-center" id="open-post-modal">
                         </div>
                     </div>
@@ -120,7 +128,7 @@
             <div class="right overflow-auto">C</div>
         </div>
     </main>
-    
+
 
 
     <script>

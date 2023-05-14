@@ -124,19 +124,23 @@ function enableButton() {
 //getting the input document by id from the html tag
 let content = document.getElementById("content");
 
+let date = new Date();
+console.log(date);
+
 //this function collects data to be posted by the user and save to the database
-function createPost() {
+async function createPost() {
     let data = {
         author: currentUser,
         content: content.value,
         numberOfLikes: 0,
         likedBy: [],
         numberOfComments: 0,
-        commentsBy: []
+        commentsBy: [],
+        time: firebase.firestore.Timestamp.now()
     }
 
     // Add a new document in collection "feeds"
-    db.collection("Feeds").doc().set(data)
+    await db.collection("Feeds").doc().set(data)
         .then(() => {
             console.log("Document successfully written!");
             content.value = "";
@@ -150,20 +154,45 @@ function createPost() {
 }
 
 //this is a self invoke function that displays all the posts in the database by fetching from the database and then displays it
-function displayAllPost() {
+async function displayAllPost() {
     showPostTag.innerHTML = "";
-    db.collection("Feeds").get().then((querySnapshot) => {
+    await db.collection("Feeds").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
             console.log(currentUser);
+            let createdAt;
+            let timeStampHour = doc.data().time.toDate().getHours();
+            let timeStampMinutes = doc.data().time.toDate().getMinutes();
+            let timeStampYear = doc.data().time.toDate().getYear() + 1900;
+            let timeStampDay = doc.data().time.toDate().getDay();
+            let timeStampMonth = doc.data().time.toDate().getMonth() + 1;
+            let postMinutes = date.getMinutes() - timeStampMinutes;
+            console.log("Hour: " +timeStampHour);
+            console.log("minutes: " +timeStampMinutes);
+            console.log("Day: " +timeStampDay);
+            console.log("Month: " +timeStampMonth);
+            console.log("Year: " +timeStampYear);
+            if (timeStampHour == date.getHours() && postMinutes < 1) {
+                createdAt = "Just Now"
+            } 
+            // else if (condition) {
+                
+            // }
+            else {
+                createdAt = postMinutes + "m";
+            }
             showPostTag.innerHTML += `
                 <div class="rounded w-100 mb-3 p-3 my-post-div">
-                    <div class="d-flex align-items-center pix-div">
+                    <div class="d-flex  pix-div mb-3">
                         <h6
                             class="me-2 text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
                             A</h6>
-                        <h6 class="">${doc.data().author}</h6>
+                        <div>
+                            <h6 class="">${doc.data().author}</h6>
+                            <h6>${createdAt}</h6>
+                        </div>
+                        
                     </div>
                     <div class="w-100">
                         <p>${doc.data().content}</p>
@@ -195,6 +224,7 @@ function displayAllPost() {
                         </button>
                     </div>
                     <hr class="mt-1">
+                    <div id="comment-div${doc.id}"></div>
                     <div class="d-flex align-items-center">
                         <div class="pics-div me-2">
                             <h6 class="pics bg-white text-black rounded-circle d-flex align-items-center justify-content-center">B</h6>
@@ -227,10 +257,12 @@ function focusCommentInput(id) {
     // userCommentInput.focus()
     document.getElementById(`user-comment-input${id}`).focus();
 }
-
+// let collect;
 //this function updates the commentsBy field with both current user name and content of the text input in the database collection
 function sendComment(id) {
     let userCommentText = document.getElementById(`user-comment-input${id}`);
+    let commentsdisplayTag = document.getElementById(`comment-div${id}`);
+
 
     let commentsData = {
         commentAuthor: currentUser,
@@ -252,7 +284,7 @@ function sendComment(id) {
                     return docRef.get(); // Get the updated document
                 })
                 .then((doc) => {
-                    console.log('Updated value of myField:', doc.data().commentsBy);
+                    console.log('Updated value of myField:', doc.data().commentsBy);                    
                     displayAllPost();
                 })
                 .catch((error) => {
@@ -269,6 +301,7 @@ function sendComment(id) {
 
 }
 
+// console.log(collect);
 
 //getting the like button document id from the html tag
 let likedBtn = document.getElementById("likeBtn");
