@@ -95,9 +95,13 @@ button {
 }
 
 .content-div{
-    background-color: green;
+    background-color: rgb(38,39,40);
     height: 90vh;
     margin-top: 10vh;
+}
+
+.second-cover-div{
+    background-color: rgb(38,39,40);
 }
 
 .cover-photo-div{
@@ -118,9 +122,6 @@ button {
     height: 40vh;
 }
 
-.picture-circle{
-    /* height: 10rem; */
-}
 
 .picture{
     width: 12rem;
@@ -130,18 +131,4 @@ button {
 
 .cam-div{
     bottom: 0;
-    /* left: 0; */
 }
-
-.picture-upload-div{
-}
-
-.pp{
-    /* width: 150px; */
-}
-
-/* .cam{
-    font-size: 1.5rem;
-    background-color: rgb(58,59,60);
-    padding: 0.1rem 0.5rem 0.3rem 0.5rem;
-} */

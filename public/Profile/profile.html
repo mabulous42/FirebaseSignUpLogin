@@ -78,17 +78,19 @@
                         <button class="btn btn-success">Upload cover photo</button>
                     </div>
                 </div>
-                <div class="w-75 shadow mx-auto mt-2 bg-black rounded py-2">
+                <div class="w-75 shadow mx-auto mt-2 rounded py-2 second-cover-div">
                     <div class="mx-auto profile-picture-div">
                         <div class="d-flex">
-                            <div class="picture-circle ">
+                            <div class="picture-circle w-25 me-3">
                                 <div class="position-relative" id="display-profile-pix">                                </div>
-                                <form class="picture-upload-div w-50">
+                                <form class="picture-upload-div w-75">
                                     <input type="file" id="profile-picture" onchange="uploadImage(event)"><br>
                                     <button class="btn btn-success" onclick="savePictureToStorage(event)">Upload Image</button>
                                 </form>
                             </div>
-                            <div>bb</div>
+                            <div class="ms-2">
+                                <h1 id="profile-name" class="fs-1"></h1>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -248,6 +248,7 @@ async function displayAllPost() {
                 createdAt = `${Math.floor(postMinutes / 1440)} days ago`;
             }
 
+            
             showPostTag.innerHTML += `
                 <div class="rounded w-100 mb-3 p-3 my-post-div">
                     <div class="d-flex  pix-div mb-3">
@@ -302,6 +303,7 @@ async function displayAllPost() {
                     </div>
                 </div>
                 `
+
             if (doc.data().likedBy.includes(currentUser)) {
                 document.getElementById(`like-text${doc.id}`).style.color = "rgb(45,134,255)";
                 document.getElementById(`likeIcon${doc.id}`).style.color = "rgb(45,134,255)";
