@@ -16,7 +16,7 @@ button {
 main {
     /* padding-top: 10vh; */
     height: 90vh;
-    background-color: red;
+    /* background-color: red; */
 }
 
 nav {
@@ -125,12 +125,19 @@ button {
 .picture{
     width: 12rem;
     height: 12rem;
-    background-color: blue;
+    /* background-color: blue; */
 }
 
 .cam-div{
     bottom: 0;
     /* left: 0; */
+}
+
+.picture-upload-div{
+}
+
+.pp{
+    /* width: 150px; */
 }
 
 /* .cam{

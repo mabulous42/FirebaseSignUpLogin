@@ -1,9 +1,14 @@
 let currentUserTag = document.getElementById("showCurrent-userPost");
 let profilePicture = document.getElementById("profile-picture");
+let displayProfilePix = document.getElementById("display-profile-pix");
+
+
+
 
 //declaring a variable to save the name of the current user
 let currentUser;
 let thisUser;
+let profilePix;
 
 //getting the displayName of the current user
 firebase.auth().onAuthStateChanged((user) => {
@@ -15,7 +20,13 @@ firebase.auth().onAuthStateChanged((user) => {
         //passing the displayName into variable currentUser
         currentUser = user.displayName;
         thisUser = user
+        profilePix = user.photoURL;
         console.log(thisUser);
+        displayProfilePix.innerHTML = `
+
+    <img src="${profilePix}" class="picture rounded-circle"/>
+
+`
         // ...
     } else {
         // User is signed out
@@ -26,6 +37,8 @@ firebase.auth().onAuthStateChanged((user) => {
     console.log(currentUser);
     firstLetter = currentUser.charAt(0);
 });
+
+
 
 //this is a self invoke function that displays all the posts in the database by fetching from the database and then displays it
 function displayAllPost() {
@@ -49,7 +62,7 @@ function displayAllPost() {
                     <p>${doc.data().content}</p>
                 </div>
                 <div class="w-100">
-                    <img src="../images/photo.webp" alt="" class="w-100">
+                    <img src="${profilePix}" alt="" class="w-100">
                 </div>
                 <hr class="mb-1">
                 <div class="d-flex align-items-center justify-content-center">
@@ -167,5 +180,7 @@ function savePictureToStorage(event) {
             });            
         });
 }
+
+
 
 
