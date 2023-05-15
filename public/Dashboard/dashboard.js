@@ -13,6 +13,7 @@ let userCommentInput = document.getElementById("user-comment-input");
 let currentUser;
 
 let userCommentText;
+let thisUser;
 
 //getting the displayName of the current user
 firebase.auth().onAuthStateChanged((user) => {
@@ -26,6 +27,7 @@ firebase.auth().onAuthStateChanged((user) => {
         userName.innerHTML = user.displayName;
         //passing the displayName into variable currentUser
         currentUser = user.displayName;
+        thisUser = user;
         // ...
     } else {
         // User is signed out
@@ -74,11 +76,13 @@ function writeSomething() {
         </div>
         <div class="px-3">
             <div class="d-flex align-items-center justify-content-between border border-white w-100 rounded p-1">
-                <div>
+                <div class="w-75">
                     <button class="add-to-post p-2">Add to your post</button>
+                    <div>
+                        <input type="file" id="post-image" onchange="contentImage(event)"/>
+                    </div>
                 </div>
-                <div class="d-flex align-items-center">
-                    <div>B</div>
+                <div class="d-flex align-items-center">                    
                     <div>C</div>
                     <div>D</div>
                     <div>E</div>
@@ -91,6 +95,24 @@ function writeSomething() {
 }
 //self invoking the function
 writeSomething();
+
+let postImage = document.getElementById("post-image");
+
+function contentImage(event) {
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    console.log(file);
+
+    reader.addEventListener('load', (e) => {
+        console.log(e);
+        let imgUrl = e.target.result;
+        console.log(imgUrl);
+    })
+
+    if (file) {
+        reader.readAsDataURL(file)
+    }
+}
 
 
 //this is an onclick function that opens a modal to type in something
@@ -127,30 +149,97 @@ let content = document.getElementById("content");
 let date = new Date();
 console.log(date);
 
+let imageLink;
+
 //this function collects data to be posted by the user and save to the database
 async function createPost() {
-    let data = {
-        author: currentUser,
-        content: content.value,
-        numberOfLikes: 0,
-        likedBy: [],
-        numberOfComments: 0,
-        commentsBy: [],
-        time: firebase.firestore.Timestamp.now()
-    }
 
-    // Add a new document in collection "feeds"
-    await db.collection("Feeds").doc().set(data)
-        .then(() => {
+    let file = postImage.files[0];
+
+    if (file) {
+        const fileName = `${Date.now()}_${file.name}`;
+        const imageRef = storage.child(fileName);
+
+        try {
+            const snapshot = await imageRef.put(file);
+            console.log('Image uploaded successfully');
+
+            const downloadURL = await imageRef.getDownloadURL();
+            console.log('Download URL:', downloadURL);
+
+            const data = {
+                author: currentUser,
+                image: downloadURL,
+                content: content.value,
+                numberOfLikes: 0,
+                likedBy: [],
+                numberOfComments: 0,
+                commentsBy: [],
+                time: firebase.firestore.Timestamp.now()
+            };
+
+            await db.collection("Feeds").doc().set(data);
+
             console.log("Document successfully written!");
             content.value = "";
             postModal.style.visibility = "hidden";
             displayAllPost();
+        } catch (error) {
+            console.error("Error uploading image or writing document: ", error);
+        }
+    } else {
+        // No image selected, proceed with other data
+        const data = {
+            author: currentUser,
+            image: null,
+            content: content.value,
+            numberOfLikes: 0,
+            likedBy: [],
+            numberOfComments: 0,
+            commentsBy: [],
+            time: firebase.firestore.Timestamp.now()
+        };
 
-        })
-        .catch((error) => {
+        try {
+            await db.collection("Feeds").doc().set(data);
+
+            console.log("Document successfully written!");
+            content.value = "";
+            postModal.style.visibility = "hidden";
+            displayAllPost();
+        } catch (error) {
             console.error("Error writing document: ", error);
-        });
+        }
+    }
+
+
+    // let data = {
+    //     author: currentUser,
+    //     image: null,
+    //     content: content.value,
+    //     numberOfLikes: 0,
+    //     likedBy: [],
+    //     numberOfComments: 0,
+    //     commentsBy: [],
+    //     time: firebase.firestore.Timestamp.now()
+    // }
+
+
+    // // Add a new document in collection "feeds"
+    // await db.collection("Feeds").doc().set(data)
+    //     .then(() => {
+    //         console.log("Document successfully written!");
+    //         content.value = "";
+    //         postModal.style.visibility = "hidden";
+    //         displayAllPost();
+
+    //     })
+    //     .catch((error) => {
+    //         console.error("Error writing document: ", error);
+    //     });
+    
+    
+    
 }
 
 //this is a self invoke function that displays all the posts in the database by fetching from the database and then displays it
@@ -163,23 +252,9 @@ async function displayAllPost() {
             console.log(currentUser);
             let createdAt;
 
-            let timeStampHour = doc.data().time.toDate().getHours();
-            let timeStampMinutes = doc.data().time.toDate().getMinutes();
-            let timeStampYear = doc.data().time.toDate().getYear() + 1900;
-            let timeStampDay = doc.data().time.toDate().getDay();
-            let timeStampDate = doc.data().time.toDate().getDate();
-            let timeStampMonth = doc.data().time.toDate().getMonth() + 1;
-
             let timeStampPostDate = doc.data().time.toDate();
             let postMinutes = Math.round((date - timeStampPostDate) / (1000 * 60));
             console.log("time diff: " + postMinutes);
-
-            console.log("Hour: " + timeStampHour);
-            console.log("minutes: " + timeStampMinutes);
-            console.log("Day: " + timeStampDay);
-            console.log("Month: " + timeStampMonth);
-            console.log("Year: " + timeStampYear);
-            console.log("Date: " + timeStampDate);
 
             if (postMinutes < 1) {
                 createdAt = "Just now";
@@ -213,7 +288,7 @@ async function displayAllPost() {
                         <p>${doc.data().content}</p>
                     </div>
                     <div class="w-100">
-                        <img src="../images/photo.webp" alt="" class="w-100">
+                        <img src="${doc.data().image}" alt="" class="w-100">
                     </div>
                     <div class="mt-2 mb-2">
                         <span class="like-icon-div"><i class="bi bi-hand-thumbs-up-fill rounded-circle bg-primary like-icon"></i></span>
