@@ -75,11 +75,6 @@ nav {
     height: 2.5rem;
 }
 
-.pix {
-    width: 2.5rem;
-    height: 2.5rem;
-}
-
 .post-box {
     cursor: pointer;
     background-color: rgb(58, 59, 60);
@@ -189,6 +184,11 @@ input {
 .like-icon{
     padding: 0.3rem 0.4rem;
     font-size: 1rem;
+}
+
+.p-photo{
+    height: 2.5rem;
+    width: 2.5rem;
 }
 
 ::-webkit-scrollbar{

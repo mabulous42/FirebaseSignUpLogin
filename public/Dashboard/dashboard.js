@@ -6,6 +6,7 @@ let showPostTag = document.getElementById("show-post");
 let writeAPostTag = document.getElementById("open-post-modal");
 let whatsOnYourMindTag = document.getElementById("on-your-mind");
 let userCommentInput = document.getElementById("user-comment-input");
+let postImage = document.getElementById("post-image");
 
 // document.getElementById("live-video").style.backgroundColor = "blue";
 
@@ -27,7 +28,11 @@ firebase.auth().onAuthStateChanged((user) => {
         userName.innerHTML = user.displayName;
         //passing the displayName into variable currentUser
         currentUser = user.displayName;
-        thisUser = user;
+        thisUser = user.photoURL;
+        writeSomething(currentUser);
+        // displayAllPost(thisUser);
+        document.getElementById("show-profile-photo").innerHTML = `
+        <img src="${user.photoURL}" class="rounded-circle p-photo"/>        `
         // ...
     } else {
         // User is signed out
@@ -52,7 +57,7 @@ function signOut() {
 }
 
 // this is a self invoke function that displays the field telling the user to write something to his/her timeling
-function writeSomething() {
+function writeSomething(currentUser) {
     writeAPostTag.innerHTML = `
     <div id="write-post-modal" class="w-75 shadow rounded">
         <div class="p-3 position-relative">
@@ -67,7 +72,7 @@ function writeSomething() {
                     class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
                     A</p>
             </div>
-            <div id="cu"></div>
+            <div>${currentUser}</div>
         </div>
         <div class="w-100 px-3">
             <textarea class="w-100 fs-4 write-content-input text-white" name="" id="content"
@@ -94,9 +99,9 @@ function writeSomething() {
     `
 }
 //self invoking the function
-writeSomething();
+writeSomething(currentUser);
 
-let postImage = document.getElementById("post-image");
+
 
 function contentImage(event) {
     let file = event.target.files[0];
@@ -113,7 +118,6 @@ function contentImage(event) {
         reader.readAsDataURL(file)
     }
 }
-
 
 //this is an onclick function that opens a modal to type in something
 function openPostModal() {
@@ -210,35 +214,7 @@ async function createPost() {
         } catch (error) {
             console.error("Error writing document: ", error);
         }
-    }
-
-
-    // let data = {
-    //     author: currentUser,
-    //     image: null,
-    //     content: content.value,
-    //     numberOfLikes: 0,
-    //     likedBy: [],
-    //     numberOfComments: 0,
-    //     commentsBy: [],
-    //     time: firebase.firestore.Timestamp.now()
-    // }
-
-
-    // // Add a new document in collection "feeds"
-    // await db.collection("Feeds").doc().set(data)
-    //     .then(() => {
-    //         console.log("Document successfully written!");
-    //         content.value = "";
-    //         postModal.style.visibility = "hidden";
-    //         displayAllPost();
-
-    //     })
-    //     .catch((error) => {
-    //         console.error("Error writing document: ", error);
-    //     });
-    
-    
+    }   
     
 }
 
@@ -275,9 +251,7 @@ async function displayAllPost() {
             showPostTag.innerHTML += `
                 <div class="rounded w-100 mb-3 p-3 my-post-div">
                     <div class="d-flex  pix-div mb-3">
-                        <h6
-                            class="me-2 text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
-                            A</h6>
+                        <img src="" class="me-2 rounded-circle p-photo"/>
                         <div>
                             <h6 class="">${doc.data().author}</h6>
                             <h6>${createdAt}</h6>
@@ -337,7 +311,6 @@ async function displayAllPost() {
 }
 //self invoking function
 displayAllPost();
-
 
 
 let commentBtn = document.getElementById("comment-btn");
