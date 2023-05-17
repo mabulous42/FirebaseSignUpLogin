@@ -6,7 +6,6 @@ let showPostTag = document.getElementById("show-post");
 let writeAPostTag = document.getElementById("open-post-modal");
 let whatsOnYourMindTag = document.getElementById("on-your-mind");
 let userCommentInput = document.getElementById("user-comment-input");
-let postImage = document.getElementById("post-image");
 
 // document.getElementById("live-video").style.backgroundColor = "blue";
 
@@ -29,7 +28,7 @@ firebase.auth().onAuthStateChanged((user) => {
         //passing the displayName into variable currentUser
         currentUser = user.displayName;
         thisUser = user.photoURL;
-        writeSomething(currentUser);
+        // writeSomething(currentUser, thisUser);
         // displayAllPost(thisUser);
         document.getElementById("show-profile-photo").innerHTML = `
         <img src="${user.photoURL}" class="rounded-circle p-photo"/>        `
@@ -57,7 +56,7 @@ function signOut() {
 }
 
 // this is a self invoke function that displays the field telling the user to write something to his/her timeling
-function writeSomething(currentUser) {
+function writeSomething() {
     writeAPostTag.innerHTML = `
     <div id="write-post-modal" class="w-75 shadow rounded">
         <div class="p-3 position-relative">
@@ -68,9 +67,7 @@ function writeSomething(currentUser) {
         <hr class="mb-2 mt-0">
         <div class="d-flex align-items-center py-2 px-3">
             <div class="me-2 pix-div">
-                <p
-                    class="text-black rounded-circle bg-white d-flex align-items-center justify-content-center pix">
-                    A</p>
+                <img src="${thisUser}" class="p-photo rounded-circle">
             </div>
             <div>${currentUser}</div>
         </div>
@@ -99,8 +96,9 @@ function writeSomething(currentUser) {
     `
 }
 //self invoking the function
-writeSomething(currentUser);
+writeSomething();
 
+let postImage = document.getElementById("post-image");
 
 
 function contentImage(event) {
@@ -131,19 +129,19 @@ function closePostModal() {
 }
 
 //getting the document by id of the post button that post whatever the user types in the input
-let postBtn = document.getElementById("post-btn");
+let postButton = document.getElementById("post-btn");
 
 //displaying the button to avoid posting an empty input
-postBtn.disabled = true;
+postButton.disabled = true;
 
 //this function changed the state of the post button from disable = true to disable = false based on some conditions
 function enableButton() {
     //checking if the input box is not empty, if it's not empty, the button should be activated
     if (content.value.trim() !== "") {
-        postBtn.disabled = false;
+        postButton.disabled = false;
     } else {
         //if the input box is empty, the button should be disable back
-        postBtn.disabled = true;
+        postButton.disabled = true;
     }
 }
 
@@ -152,8 +150,6 @@ let content = document.getElementById("content");
 
 let date = new Date();
 console.log(date);
-
-let imageLink;
 
 //this function collects data to be posted by the user and save to the database
 async function createPost() {
@@ -289,7 +285,7 @@ async function displayAllPost() {
                         </button>
                     </div>
                     <hr class="mt-1">
-                    <div id="comment-div${doc.id}"></div>
+                    <div id="comment-div${doc.id}">${doc.data().commentsBy.forEach((el)=> el.commentAuthor)}</div>
                     <div class="d-flex align-items-center">
                         <div class="pics-div me-2">
                             <h6 class="pics bg-white text-black rounded-circle d-flex align-items-center justify-content-center">B</h6>
@@ -303,7 +299,12 @@ async function displayAllPost() {
                     </div>
                 </div>
                 `
-
+                doc.data().commentsBy.forEach((el)=> {
+                    console.log(el);
+                    document.getElementById(`comment-div${doc.id}`).innerHTML +=`
+                    <span>${el.commentAuthor}</span>
+                    `
+                })
             if (doc.data().likedBy.includes(currentUser)) {
                 document.getElementById(`like-text${doc.id}`).style.color = "rgb(45,134,255)";
                 document.getElementById(`likeIcon${doc.id}`).style.color = "rgb(45,134,255)";
