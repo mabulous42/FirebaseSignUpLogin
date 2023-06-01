@@ -191,9 +191,22 @@ input {
     width: 2.5rem;
 }
 
+.showing-comment{
+    width: auto;
+}
+
 .comment-div-inner{
     background-color: rgb(58,59,60);
-    background-color: red;
+    width: auto;
+}
+
+.comment-div-inner span{
+    font-size: 14px;
+    margin-top: -5px;
+}
+
+.comment-div-inner h6{
+    margin: 0;
 }
 
 ::-webkit-scrollbar{
