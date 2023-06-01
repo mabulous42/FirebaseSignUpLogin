@@ -1,0 +1,71 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(240,242,245);
+}
+
+.inner-div{
+    top: 8rem;
+}
+
+.facebook{
+    width: 40%;
+}
+
+.sign-in{
+    width: 29%;
+}
+
+.facebook{
+    margin-left: 10rem;
+}
+
+.facebook h3{    
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 400;
+    width: auto;
+}
+
+.forgotten{
+    color: #1877f2;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.create-page-text span{
+    font-size: 14px;
+    line-height: 18.76px;
+    font-weight: 400;
+}
+
+.modal-div{
+    top: 0rem;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.753);
+}
+
+.inner-modal{
+    width: 27rem;
+}
+
+.modal1 h1{
+    font-size: 32px;
+    line-height: 38px;
+    font-weight: 600;
+}
+
+.modal1 h6{
+    color: RGBA(96, 103, 112, 1);
+    line-height: 24px;
+    font-weight: 400;
+    font-size: 15px;
+}
+

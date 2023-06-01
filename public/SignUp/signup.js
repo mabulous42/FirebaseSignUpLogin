@@ -1,6 +1,7 @@
-let userName = document.getElementById("user-name");
-let email = document.getElementById("email");
-let password = document.getElementById("password");
+let firstName = document.getElementById("user-name");
+let email = document.getElementById("user-email");
+let password = document.getElementById("user-password");
+let surname = document.getElementById("surname");
 
 function signUp(ev) {
     ev.preventDefault();
@@ -12,14 +13,17 @@ function signUp(ev) {
                 // Signed in 
                 var user = userCredential.user;
                 user.updateProfile({
-                    displayName: userName.value,
+                    displayName: firstName.value + " " + surname.value,
                 }).then(() => {
                     alert("Signed up successfully");
-                    userName.value = "";
+                    firstName.value = "";
+                    surname.value = "";
                     email.value = "";
                     password.value = "";
                     console.log(user);
-                    window.location.href = "../index.html"
+                    setTimeout(() => {
+                        window.location.href = "../index.html"                        
+                    }, 2000);
                 }).catch((error) => {
                     // An error occurred
                     // ...

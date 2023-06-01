@@ -285,24 +285,27 @@ async function displayAllPost() {
                         </button>
                     </div>
                     <hr class="mt-1">
-                    <div id="comment-div${doc.id}">${doc.data().commentsBy.forEach((el)=> el.commentAuthor)}</div>
                     <div class="d-flex align-items-center">
-                        <div class="pics-div me-2">
-                            <h6 class="pics bg-white text-black rounded-circle d-flex align-items-center justify-content-center">B</h6>
-                        </div>
-                        <div class="w-100 position-relative">
-                            <input type="text" name="" id="user-comment-input${doc.id}" placeholder="Write a comment..." class="comment-input p-1 ps-3 rounded-pill w-100">
-                            <button onclick="sendComment('${doc.id}')" class="position-absolute comment-btn d-flex align-items-center justify-content-center rounded-circle">
-                            <i class="fa-solid fa-square-arrow-up-right send-comment"></i>
-                            </button>
-                        </div>
+                    <div class="pics-div me-2">
+                    <h6 class="pics bg-white text-black rounded-circle d-flex align-items-center justify-content-center">B</h6>
                     </div>
+                    <div class="w-100 position-relative">
+                    <input type="text" name="" id="user-comment-input${doc.id}" placeholder="Write a comment..." class="comment-input p-1 ps-3 rounded-pill w-100">
+                    <button onclick="sendComment('${doc.id}')" class="position-absolute comment-btn d-flex align-items-center justify-content-center rounded-circle">
+                    <i class="fa-solid fa-square-arrow-up-right send-comment"></i>
+                    </button>
+                    </div>
+                    </div>
+                    <div id="comment-div${doc.id}"></div>
                 </div>
                 `
                 doc.data().commentsBy.forEach((el)=> {
                     console.log(el);
                     document.getElementById(`comment-div${doc.id}`).innerHTML +=`
-                    <span>${el.commentAuthor}</span>
+                    <div class='w-75 rounded mt-3 comment-div-inner bg-danger ms-5'>
+                        <h6>${el.commentAuthor}</h6>                    
+                        <span>${el.commentMsg}</span>
+                    </div>
                     `
                 })
             if (doc.data().likedBy.includes(currentUser)) {

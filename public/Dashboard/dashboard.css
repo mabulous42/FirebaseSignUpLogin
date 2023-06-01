@@ -191,6 +191,11 @@ input {
     width: 2.5rem;
 }
 
+.comment-div-inner{
+    background-color: rgb(58,59,60);
+    background-color: red;
+}
+
 ::-webkit-scrollbar{
     /* display: none; */
 }
@@ -231,5 +236,6 @@ input {
     body{
         height: 100vh;
     }
+
 
 }
