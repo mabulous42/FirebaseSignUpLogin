@@ -210,8 +210,8 @@ async function createPost() {
         } catch (error) {
             console.error("Error writing document: ", error);
         }
-    }   
-    
+    }
+
 }
 
 //this is a self invoke function that displays all the posts in the database by fetching from the database and then displays it
@@ -244,7 +244,7 @@ async function displayAllPost() {
                 createdAt = `${Math.floor(postMinutes / 1440)} days ago`;
             }
 
-            
+
             showPostTag.innerHTML += `
                 <div class="rounded w-100 mb-3 p-3 my-post-div">
                     <div class="d-flex  pix-div mb-3">
@@ -299,15 +299,20 @@ async function displayAllPost() {
                     <div class="showing-comment" id="comment-div${doc.id}"></div>
                 </div>
                 `
-                doc.data().commentsBy.forEach((el)=> {
-                    console.log(el);
-                    document.getElementById(`comment-div${doc.id}`).innerHTML +=`
+            doc.data().commentsBy.forEach((el) => {
+                console.log(el);
+                document.getElementById(`comment-div${doc.id}`).innerHTML += `
                     <div class='rounded-4 py-2 ps-3 mt-3 comment-div-inner ms-5'>
                         <h6 class=''>${el.commentAuthor}</h6>                    
                         <span>${el.commentMsg}</span>
                     </div>
                     `
-                })
+            })
+
+            document.getElementById("profile-pictureTag").innerHTML = `
+            <img src="${thisUser}" alt="" class="img rounded-circle">
+            `
+
             if (doc.data().likedBy.includes(currentUser)) {
                 document.getElementById(`like-text${doc.id}`).style.color = "rgb(45,134,255)";
                 document.getElementById(`likeIcon${doc.id}`).style.color = "rgb(45,134,255)";

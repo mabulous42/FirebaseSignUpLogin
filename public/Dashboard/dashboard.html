@@ -36,7 +36,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="dashboard.html">Home</a>
                     </li>
                     <li>
                         <button class="profile-btn rounded p-2 w-100 btn btn-success" onclick="gotoProfile()"><span
@@ -73,8 +73,195 @@
         <div class="d-flex position-relative w-100">
             <div class="left overflow-auto">
                 <div class="mx-1 my-1">
-                    <button class="profile-btn rounded p-2 w-100" onclick="gotoProfile()"><span
-                            id="profile-name"></span></button>
+                    <button class="profile-btn rounded p-2 w-100"><span></span></button>
+                    <div class="left-container">
+                        <button class="my-profile-div w-100 d-flex align-items-center" onclick="gotoProfile()">
+                            <div id="profile-pictureTag"><img src="../images/abbas-img.jpeg" alt=""
+                                    class="img rounded-circle"></div>
+                            <div class="l-text" id="profile-name"></div>
+                        </button>
+                        <button class="friends-div">
+                            <a class="w-100 d-flex align-items-center" href="friends.html">
+                                <div><img src="../images/users-icon-10.jpg" alt="" class="img"></div>
+                                <div class="l-text">Friends</div>
+                            </a>
+                        </button>
+                        <button class="left-section-div d-flex align-items-center">
+                            <div><img src="../images/recents.png" alt="" class="imgS"></div>
+                            <div class="l-text">Most Recent</div>
+                        </button>
+                        <button class="left-section-div d-flex align-items-center">
+                            <div><img src="../images/group.png" alt="" class="imgS"></div>
+                            <div class="l-text">Groups</div>
+                        </button>
+                        <button class="left-section-div d-flex align-items-center">
+                            <div><img src="../images/marketplace.png" alt="" class="imgS"></div>
+                            <div class="l-text">Marketplace</div>
+                        </button>
+                        <button class="left-section-div d-flex align-items-center">
+                            <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                            <div class="l-text">Watch</div>
+                        </button>
+                        <div class="see-more-divP">
+                            <button class="left-seemore-div d-flex align-items-center">
+                                <div class="arrow-down-div"><i class="fa-solid fa-angle-down arrow-down"></i></div>
+                                <div class="l-text">See more</div>
+                            </button>
+
+                            <div class="see-more-div">
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Ad Center</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Ads Manager</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Business Manager</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Climate Science Center</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Crisis response</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Events</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Favorites</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Fundraisers</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Gaming Video</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Like videos</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Memories</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Messenger</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Messenger Kids</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Orders and payments</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Pages</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Play Games</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Recent ad activity</div>
+                                </button>
+                                <button class="left-section-div d-flex align-items-center">
+                                    <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                    <div class="l-text">Saved</div>
+                                </button>
+                            </div>
+                            <div class="see-less-div">
+                                <button class="left-seeless-div d-flex align-items-center">
+                                    <div class="arrow-down-div"><i class="fa-solid fa-angle-up arrow-up"></i></div>
+                                    <div class="l-text">See less</div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <hr class="mt-2 mb-2">
+
+                        <div class="shortcut-div">
+                            <div class="short-text-div d-flex justify-content-between mb-2">
+                                <div class="p">Your shortcuts</div>
+                                <div class="span">Edit</div>
+                            </div>
+                            <button class="left-section-div d-flex align-items-center">
+                                <div><img src="../images/jobs.png" alt="" class="imgS"></div>
+                                <div class="l-text">All Jobs Update Worldwide</div>
+                            </button>
+                            <button class="left-section-div d-flex align-items-center">
+                                <div><img src="../images/job2.png" alt="" class="imgS"></div>
+                                <div class="l-text">All Nationality Jobs</div>
+                            </button>
+                            <button class="left-section-div d-flex align-items-center">
+                                <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                <div class="l-text">Bossman concepts</div>
+                            </button>
+                            <button class="left-section-div d-flex align-items-center">
+                                <div><img src="../images/candy-crush-png-10.png" alt="" class="imgS"></div>
+                                <div class="l-text">Candy Crush Saga</div>
+                            </button>
+                            <button class="left-section-div d-flex align-items-center">
+                                <div><img src="../images/employ.png" alt="" class="imgS"></div>
+                                <div class="l-text">Employment Offers Worldwide</div>
+                            </button>
+                            <div class="see-more-divP">
+                                <button class="left-seemore-div d-flex align-items-center">
+                                    <div class="arrow-down-div"><i class="fa-solid fa-angle-down arrow-down"></i></div>
+                                    <div class="l-text">See more</div>
+                                </button>
+                                <div class="see-more-div">
+                                    <button class="left-section-div d-flex align-items-center">
+                                        <div><img src="../images/jobs.png" alt="" class="imgS"></div>
+                                        <div class="l-text">All Jobs Update Worldwide</div>
+                                    </button>
+                                    <button class="left-section-div d-flex align-items-center">
+                                        <div><img src="../images/job2.png" alt="" class="imgS"></div>
+                                        <div class="l-text">All Nationality Jobs</div>
+                                    </button>
+                                    <button class="left-section-div d-flex align-items-center">
+                                        <div><img src="../images/facebook-watch.png" alt="" class="imgS"></div>
+                                        <div class="l-text">Bossman concepts</div>
+                                    </button>
+                                    <button class="left-section-div d-flex align-items-center">
+                                        <div><img src="../images/candy-crush-png-10.png" alt="" class="imgS"></div>
+                                        <div class="l-text">Candy Crush Saga</div>
+                                    </button>
+                                    <button class="left-section-div d-flex align-items-center">
+                                        <div><img src="../images/employ.png" alt="" class="imgS"></div>
+                                        <div class="l-text">Employment Offers Worldwide</div>
+                                    </button>
+                                </div>
+                                <div class="see-less-div">
+                                    <button class="left-seeless-div d-flex align-items-center">
+                                        <div class="arrow-down-div"><i class="fa-solid fa-angle-up arrow-up"></i></div>
+                                        <div class="l-text">See less</div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="left-footer-div d-flex flex-wrap mt-2 ms-2">
+                            <a href="" class="me-1 aa text-decoration-none">Privacy ·</a>
+                            <a href="" class="me-1 aa text-decoration-none">Terms ·</a>
+                            <a href="" class="me-1 aa text-decoration-none">Advertising ·</a>
+                            <a href="" class="me-1 aa text-decoration-none">Ad Choices ·</a>
+                            <a href="" class="me-1 aa text-decoration-none">Cookies ·</a>
+                            <a href="" class="me-1 aa text-decoration-none">More ·</a>
+                            <a href="" class="me-1 aa text-decoration-none">Meta © 2023</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="middle d-flex align-items-center justify-content-center overflow-auto">
@@ -124,7 +311,181 @@
                     </div>
                 </div>
             </div>
-            <div class="right overflow-auto">C</div>
+            <div class="right overflow-auto">
+                <div class="right-container">
+                    <div class="sponsored-text">Sponsored</div>
+                    <button class="right-section-btn d-flex align-items-center position-relative">
+                        <div><img src="../images/grammerly.png" alt="" class="right-img"></div>
+                        <div class="rtext-div">
+                            <div class="r-text1">Build your work reputation with better writing</div>
+                            <div class="r-text2">grammarly.com</div>
+                        </div>
+                        <div class="dots position-absolute"><i class="fa-solid fa-ellipsis"></i></div>
+                    </button>
+                    <button class="right-section-btn d-flex align-items-center position-relative">
+                        <div><img src="../images/fintech.jfif" alt="" class="right-img"></div>
+                        <div class="rtext-div">
+                            <div class="r-text1">Innovate with FinTech</div>
+                            <div class="r-text2">harvardx-<br>onlinecourses.getsmarte...</div>
+                        </div>
+                        <div class="dots position-absolute"><i class="fa-solid fa-ellipsis"></i></div>
+                    </button>
+
+                    <div class="inner-right-div">
+                        <hr class="mt-2">
+                    </div>
+
+                    <div class="page-profile-div d-flex justify-content-between align-items-center mb-1">
+                        <div class="textt">Your Pages and profiles</div>
+                        <div class="dot2"><i class="fa-solid fa-ellipsis"></i></div>
+                    </div>
+                    <button class="employment-div d-flex align-items-center">
+                        <div><img src="../images/job111.png" alt="" class="job11"></div>
+                        <div class="R-text">Latest Employment Offers</div>
+                    </button>
+                    <button class="btnR d-flex align-items-center">
+                        <div class="icon-div"><span class="material-symbols-outlined icons">
+                                forum
+                            </span></div>
+                        <div class="t-text">20 Messages</div>
+                    </button>
+                    <button class="btnR d-flex align-items-center">
+                        <div class="icon-div"><i class="fa-solid fa-bell"></i></div>
+                        <div class="t-text">20+ Notifications</div>
+                    </button>
+                    <button class="btnR d-flex align-items-center">
+                        <div class="icon-div"><span class="material-symbols-outlined">
+                                sensor_occupied
+                            </span></div>
+                        <div class="t-text">Switch into Page</div>
+                    </button>
+                    <button class="btnR d-flex align-items-center">
+                        <div class="icon-div"><span class="material-symbols-outlined">
+                                campaign
+                            </span></div>
+                        <div class="t-text">Create promotion</div>
+                    </button>
+
+                    <div class="inner-right-div">
+                        <hr class="mt-2">
+                    </div>
+
+                    <div class="page-profile-div mb-1">
+                        <div class="textt">Birthdays</div>
+                    </div>
+                    <button class="employment-div d-flex align-items-center">
+                        <div><img src="../images/gift.png" alt="" class="job11"></div>
+                        <div class="R-text">Taofeek Badru and 5 others have birthdays today.</div>
+                    </button>
+
+                    <div class="inner-right-div">
+                        <hr class="mt-2">
+                    </div>
+
+                    <div class="contact-div d-flex justify-content-between align-items-center mb-1">
+                        <div class="textt">Contacts</div>
+                        <div class="d-flex align-items-center">
+                            <div class="vid">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <div class="search">
+                                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            </div>
+                            <div class="dt">
+                                <i class="fa-solid fa-ellipsis dt-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/istockphoto.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">Mustapha Adetayo</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/istockphoto.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">Nafisat Lasisi</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/istockphoto.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">Soliu Matemilola</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/istockphoto.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">Adetunji Muraina</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/istockphoto.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">Gideon Oluwasola Olanrewaju</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/istockphoto.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">SenatorHardeyhargbo Khennhandsome Heedreez Haryourfhe</div>
+                        <div class="onlineP position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/istockphoto.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">Ayandeji Banji Muhammed</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/istockphoto.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">Alabi Mariam Abiodun Ore-Ofe</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/istockphoto.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">Badirat Olateju</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/istockphoto.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">Ojeleye Sola Emmanuel</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/istockphoto.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">Adebayo Julius</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/istockphoto.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">Eneth Africrem</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+
+                    <div class="inner-right-div">
+                        <hr class="mt-2">
+                    </div>
+
+                    <div class="contact-div mb-1">
+                        <div class="textt">Group conversations</div>
+                    </div>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/group-chat.png" alt="" class="c-img"></div>
+                        <div class="R-text">future leaders</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/gettyimages.webp" alt="" class="p-img"></div>
+                        <div class="R-text">Alaga, Teejay and 8 others</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><img src="../images/unnamed.jpg" alt="" class="p-img"></div>
+                        <div class="R-text">Group chat</div>
+                        <div class="online position-absolute"></div>
+                    </button>
+                    <button class="employment-div d-flex align-items-center position-relative">
+                        <div><i class="fa-solid fa-plus plus"></i></div>
+                        <div class="R-text">Create new group</div>
+                    </button>
+
+                </div>
+            </div>
         </div>
     </main>
 
