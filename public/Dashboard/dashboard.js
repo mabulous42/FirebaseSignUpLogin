@@ -440,3 +440,41 @@ function isLike(id) {
 function gotoProfile() {
     window.location.href = "../Profile/profile.html"
 }
+
+let seeMore = document.getElementById("see-more");
+let seeLess = document.getElementById("see-less-div");
+let seeLessBtn = document.getElementById("see-less-btn");
+
+seeLess.style.display = "none";
+seeLessBtn.style.display = "none";
+
+seeMore.addEventListener('click', () => {
+    seeMore.style.display = "none";
+    seeLess.style.display = "block";
+    seeLessBtn.style.display = "block";
+})
+
+seeLessBtn.addEventListener('click', () => {
+    seeMore.style.display = "block";
+    seeLess.style.display = "none";
+    seeLessBtn.style.display = "none";
+})
+
+let seeMore2 = document.getElementById("see-more-btn2");
+let seeLess2 = document.getElementById("see-less-div-2");
+let seeLessBtn2 = document.getElementById("see-less-btn2");
+
+seeLess2.style.display = "none";
+seeLessBtn2.style.display = "none";
+
+seeMore2.addEventListener('click', () => {
+    seeMore2.style.display = "none";
+    seeLess2.style.display = "block";
+    seeLessBtn2.style.display = "block";
+})
+
+seeLessBtn2.addEventListener('click', () => {
+    seeMore2.style.display = "block";
+    seeLess2.style.display = "none";
+    seeLessBtn2.style.display = "none";
+})

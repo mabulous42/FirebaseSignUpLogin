@@ -283,21 +283,21 @@ input {
     text-align: center;
 }
 
-.see-more-div {
+/* .see-more-div {
     display: none;
-}
+} */
 
-.see-more-divP:focus-within .see-more-div {
+/* .see-more-divP:focus-within .see-more-div {
     display: block;
-}
+} */
 
-.see-less-div {
+/* .see-less-div {
     display: none;
-}
+} */
 
-.see-more-divP:focus-within .see-less-div {
+/* .see-more-divP:focus-within .see-less-div {
     display: block;
-}
+} */
 
 .short-text-div {
     padding: 7px 12px 0 5px;
