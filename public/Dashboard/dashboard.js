@@ -248,7 +248,9 @@ async function displayAllPost() {
             showPostTag.innerHTML += `
                 <div class="rounded w-100 mb-3 p-3 my-post-div">
                     <div class="d-flex  pix-div mb-3">
-                        <img src="" class="me-2 rounded-circle p-photo"/>
+                        <div id='userImage${doc.id}'>
+                                                    
+                        </div>
                         <div>
                             <h6 class="">${doc.data().author}</h6>
                             <h6>${createdAt}</h6>
@@ -286,8 +288,8 @@ async function displayAllPost() {
                     </div>
                     <hr class="mt-1">
                     <div class="d-flex align-items-center">
-                        <div class="pics-div me-2">
-                            <h6 class="pics bg-white text-black rounded-circle d-flex align-items-center justify-content-center">B</h6>
+                        <div class="pics-div me-2" id='user-comment-div${doc.id}'>
+                            <img src="${thisUser}" class="img rounded-circle"/>
                         </div>
                         <div class="w-100 position-relative">
                             <input type="text" name="" id="user-comment-input${doc.id}" placeholder="Write a comment..." class="comment-input p-1 ps-3 rounded-pill w-100">
@@ -316,6 +318,16 @@ async function displayAllPost() {
             if (doc.data().likedBy.includes(currentUser)) {
                 document.getElementById(`like-text${doc.id}`).style.color = "rgb(45,134,255)";
                 document.getElementById(`likeIcon${doc.id}`).style.color = "rgb(45,134,255)";
+            }
+
+            if (doc.data().author == currentUser) {
+                document.getElementById(`userImage${doc.id}`).innerHTML += `
+                <img src="${thisUser}" class="me-2 rounded-circle p-photo"/>
+                `
+            } else {
+                document.getElementById(`userImage${doc.id}`).innerHTML += `
+                <img src="../images/Ellipse12.png" class="me-2 rounded-circle p-photo"/>
+                `
             }
         });
     });
