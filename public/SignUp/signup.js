@@ -11,9 +11,13 @@ function signUp(ev) {
         firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
             .then((userCredential) => {
                 // Signed in 
+                let img = new Image();
+                img.src = "../images/user.png";
+                let profilePhoto = img.src;
                 var user = userCredential.user;
                 user.updateProfile({
                     displayName: firstName.value + " " + surname.value,
+                    photoURL: profilePhoto,
                 }).then(() => {
                     alert("Signed up successfully");
                     firstName.value = "";

@@ -22,7 +22,7 @@ firebase.auth().onAuthStateChanged((user) => {
         console.log(user);
         //passing the displayName into variable currentUser
         currentUser = user.displayName;
-        thisUser = user
+        thisUser = user;
         profilePix = user.photoURL;
         console.log(thisUser);
         profileNameTag.innerHTML = currentUser;
